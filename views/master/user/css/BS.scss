@@ -1,0 +1,441 @@
+/*==========-==========-==========-==========-==========*/
+/* bootstrapをコピペ(微変更済) */
+/* -------------------------------------------------- */
+
+.w-25{width:25%!important}
+.w-40{width:40%!important}
+.w-50{width:50%!important}
+.w-75{width:75%!important}
+.w-100{width:100%!important}
+.w-auto{width:auto!important}
+.h-25{height:25%!important}
+.h-50{height:50%!important}
+.h-75{height:75%!important}
+.h-100{height:100%!important}
+.h-auto{height:auto!important}
+
+/* -------------------------------------------------- */
+//tableの奇数行を暗くする
+//odd：奇数、even：偶数
+.table-striped tbody tr:nth-of-type(odd){
+   background-color:rgba(0,0,0,.075);
+}
+.table-dark,.table-striped tbody tr:nth-of-type(even){
+   background-color:rgba(255,255,255,.05);
+}
+.table-float tbody tr:hover{
+   box-shadow: 0 .4rem .8rem rgba(0,0,0,.1);
+   transition: 0.2s;
+}
+//tableのborderを変更
+tbody, td, tfoot, th, thead, tr {
+   border-color: inherit;
+   border-style: solid;
+   border-width: 0;
+}
+.table{
+   border-color: #dee2e6;
+}
+.table td,.table th{
+   padding:.75rem;
+   //vertical-align:top;
+   border-top:1px solid #dee2e6;
+}
+.table thead th{
+   // vertical-align:bottom;
+   border-bottom:2px solid #dee2e6;
+}
+/* .table tbody{
+   border-top:2px solid #dee2e6
+} */
+table {
+   caption-side: bottom;
+   border-collapse: collapse;
+}
+
+h1{
+   font-size: calc(1.375rem + 1.5vw);
+   font-weight: 500;
+   line-height: 1.2;
+}
+body{
+   line-height: 1.5;
+   font-weight: 400;
+   font-family:
+   system-ui,-apple-system,"Segoe UI",Roboto,
+   "Helvetica Neue",Arial,"Noto Sans",
+   "Liberation Sans",sans-serif,
+   "Apple Color Emoji","Segoe UI Emoji",
+   "Segoe UI Symbol","Noto Color Emoji";
+}
+button,input,textarea{
+   font-family: inherit;//親要素から継承する
+   font-size: inherit;
+   line-height: inherit;
+}
+
+/*==========-==========-==========-==========-==========*/
+/* bootstrapっぽい自作 */
+/* -------------------------------------------------- */
+
+.divCenter{
+   display: flex;
+   justify-content: center;
+}
+.pCenter{
+   text-align: center !important;
+}
+.verticalWriting{
+   writing-mode: vertical-rl;
+}
+.rightWriting{
+   text-align: right;
+}
+
+/* -------------------------------------------------- */
+
+.pt-10{padding-top: 1rem;}
+.m-0a{margin: 0 auto;}
+
+/* -------------------------------------------------- */
+
+/* h2,h3,h4,h5,h6{
+   margin-bottom: 7.5px;
+}
+p{
+   margin-bottom: 10px;
+} */
+
+/* -------------------------------------------------- */
+
+table{
+   margin: 3rem auto;
+   // background-color: #fff;
+   width: 90%;
+   // max-width: 960px;
+}
+th,td{
+   text-align: center;
+   vertical-align: middle;
+}
+.borderCancel{
+   tbody,th,td{
+      border: none!important;
+   }
+}
+.tableMenu{
+   text-align: center;
+   background: linear-gradient(
+      to bottom,
+      rgb(30, 136, 185) 0%,
+      rgb(22, 128, 177) 50%,
+      rgb(15, 112, 156)
+   );
+   color: whitesmoke;
+   padding: 3px !important; //button用
+   button{
+      background-color: transparent;
+      color: whitesmoke;
+      width: 100%;
+      margin: 0;
+      padding: 6px 0;
+      border: solid 1px skyblue;
+      border-radius: 3px;
+      &:hover{
+         background-color: rgba(255, 255, 255, 0.1);
+         color: whitesmoke;
+      }
+   }
+   span{
+      color: whitesmoke;
+   }
+}
+.table-float tbody tr:hover{
+   box-shadow: 0 .4rem .8rem rgba(0,0,0,.1);
+   transition: 0.2s;
+}
+
+/* -------------------------------------------------- */
+
+.errorMsg{
+   // font-size: 1.6rem;
+   // font-weight: normal;
+   color: crimson;
+   // text-align: center;
+   // margin-top: .5rem;
+}
+
+/*==========-==========-==========-==========-==========*/
+/* 基礎 */
+/* -------------------------------------------------- */
+
+/*初期化*/
+*,::before,::after{
+	margin:0px;
+	padding:0px;
+	box-sizing: border-box;
+   color: rgb(50, 50, 50);
+}
+html{
+   scroll-behavior: smooth;/* スクロールをスムーズに */
+   font-size: 62.5%;/* 1rem = 10pxになった */
+}
+body{
+   font-size: 1.6rem;
+}
+li{
+	list-style-type: none;
+	list-style-position: outside;
+}
+img{
+	vertical-align: bottom;/*画像のベースラインを下にする*/
+	max-width: 100%;/*画像の横幅の最大値を親要素に合わせる*/
+}
+a{
+   display: block;
+	text-decoration:none;/*aの下線を非表示にする*/
+   color: rgb(145, 145, 145);
+   color: #0d6efd;
+   &:hover{
+      color: #2d2d2d;
+      color: #0847a5;
+      text-decoration: underline;
+   }
+   cursor: pointer;
+}
+/* -------------------------------------------------- */
+/* 空要素を非表示に */
+.empty{display: none;} /* 削除・領域も除去 */
+.hidden{visibility: hidden;} /* 非表示・不可視 */
+.d-unset{display: unset;}
+.d-block{display: block;}
+
+/* -------------------------------------------------- */
+
+input,select,textarea{
+   background-color: #fff;
+   width: 90%;
+   padding: 3px;
+   padding-left: 6px;
+}
+[type="text"] {
+   // width: 150px;
+   height: 32px;
+}
+select{
+   height: 32px;
+}
+
+button{
+   width: auto;
+   height: auto;
+   margin: 0 10px;
+   padding: 6px 10px;
+   background-color: rgb(100, 180, 245);
+   background-color: rgb(132, 194, 252);
+   color: black;
+   font-size: 16px;
+   font-weight: 500;
+   cursor: pointer;
+   text-align: center;
+   border-radius: .75rem;
+}
+button:hover{
+   background-color: rgb(93, 172, 236);
+   background-color: rgb(144, 201, 255);
+   color: rgb(37, 15, 2);
+}
+.notBtn{
+   padding: 0;
+   margin: 0;
+   background-color: transparent !important;
+   // border-radius: unset;
+   border: none !important;
+   cursor: unset !important;
+   &:hover{
+      background-color: transparent !important;
+   }
+}
+.whiteBtn{
+   padding: 0;
+   margin: 0;
+   background-color: whitesmoke;
+   border-radius: unset;
+   &:hover{
+      background-color: whitesmoke;
+   }
+}
+.borderBtn{
+   width: auto;
+   border: gray 1px solid;
+   border-radius: 1rem;
+   padding: 3px 7px 2px;
+   text-decoration: none;
+}
+.anchorBtn{
+   padding: 0;
+   margin: 0;
+   background-color: transparent;
+   color: #0d6efd;
+   border-radius: unset;
+   border: none;
+   &:hover{
+      background-color: transparent;
+      color: #0847a5;
+      text-decoration: underline;
+   }
+}
+.buttonAnchor{
+   width: fit-content;
+   height: auto;
+   margin: 0 10px;
+   padding: 6px 10px;
+   background-color: rgb(132, 194, 252);
+   color: black;
+   font-size: 16px;
+   font-weight: 500;
+   border-radius: .75rem;
+   &:hover{
+      text-decoration: none;
+      background-color: rgb(144, 201, 255);
+      color: rgb(37, 15, 2);
+   }
+   border: #0f0f0f 2px solid;
+   border-top-color: dimgray;
+   border-left-color: dimgray;
+   &:active{
+      // box-shadow: .2rem .3rem 1rem rgba(0,0,0,.15) inset;
+      border: dimgray 2px solid;
+      border-top-color: #0f0f0f;
+      border-left-color: #0f0f0f;
+   }
+   text-align: center;
+}
+.destructBtn{
+   //自爆switchのやつ
+   // padding: .5rem 1.5rem 3rem;
+   padding: 10rem 0 0;
+   width: 100px; height: 130px;
+   background-image: url(../img/btn/normalBtn.png);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-color: transparent;
+   border: none;
+   &:hover{
+      background-color: transparent;
+      border: none;
+   }
+   position: relative;
+   &::before{
+      content: ""; display: block; position: absolute; top: 0; left: 0;
+      // transform: translate(50%,50%);
+      width: 100px; height: 100px;
+      // background-color: red;
+      // opacity: .3;
+      background-image: url(../img/btn/cover3.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: .1s;
+      pointer-events: none; // カバーは押せない仕様
+   }
+   &:hover{
+      &::before{
+         top: -55px;
+         // background-color: blue;
+         // transition: .3s;
+      }
+   }
+   &:active{
+      background-image: url(../img/btn/pressedBtn.png);
+      // &::before{
+      //    background-color: green;
+      // }
+   }
+}
+.destructBtn2{
+   //自爆switchのやつ
+   // padding: .5rem 1.5rem 3rem;
+   padding: 10rem 0 0;
+   width: 100px; height: 130px;
+   background-image: url(../img/btn/normalBtn.png);
+   background-size: contain;
+   background-repeat: no-repeat;
+   position: relative;
+   &::before{
+      content: ""; display: block; position: absolute; top: 0; left: 0;
+      // transform: translate(50%,50%);
+      width: 100px; height: 100px;
+      // background-color: red;
+      // opacity: .3;
+      background-image: url(../img/btn/cover3.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: .1s;
+   }
+   &:hover:before{
+      top: -55px;
+   }
+   button{
+      background-color: transparent;
+      border: none;
+      &:hover{
+         background-color: transparent;
+         border: none;
+      }
+      border-radius: 50%;
+      width: 45px; height: 40px;
+      position: absolute; top: 50px; left: 40px;
+      transform: translate(-50%,-50%);
+      //ボタンでイベント発動
+      pointer-events: auto;
+   }
+   //親要素イベント非発動
+   pointer-events: none;
+   &:active{
+      background-image: url(../img/btn/pressedBtn.png);
+   }
+}
+.disabledBtn{
+   cursor: not-allowed;
+   opacity: .75;
+   &:hover{
+      background-color: rgb(132, 194, 252);
+   }
+}
+
+.pointer{
+   cursor: pointer;
+}
+
+.displayFlex{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   align-items: center;
+   align-content: space-around;
+}
+
+/* -------------------------------------------------- */
+
+.contents{
+   padding: 2rem;
+   border-radius: 10px;
+   width: 80%;
+   min-width: calc(960px * 0.7);
+   margin: 1rem auto 2rem;
+   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+   //min-height: 75vh;
+   // margin-bottom: 1rem !important;
+}
+
+form{
+   text-align: center;
+}
+
+footer{
+   text-align: center;
+   p{
+      color: #6c757d !important; //text-muted
+   }
+   background-color: #c8c8c8;
+}
