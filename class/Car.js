@@ -1,15 +1,15 @@
-module.exports = class Auction {
+module.exports = class Car {
   constructor() {
-    // 車の名前
+    // db上のid
+    this._carId = null;
+    // 車の車種名
     this._carName = null;
     // 車のメーカー
-    this._catMaker = null;
-    // 車の車種
-    this._carModel = null;
+    this._carMaker = null;
     // 車の乗車定員数
-    this._carCapacity = null;
+    this._carPassenger = null;
     // 車の走行年数
-    this._carDrivingYears = null;
+    this._carModelYear = null;
     // 車の走行距離
     this._carMileage = null;
     // 車のベースカラー
