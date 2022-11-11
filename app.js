@@ -11,27 +11,19 @@ const config = require('./config');
 
 var app = express();
 
-var cChatRouter = require('./routes/c_chat');
-var pChatRouter = require('./routes/p_chat');
-var login = require('./routes/login');
+var uiTest = require('./routes/ui_test');
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('port', config.port);
 
-// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', cChatRouter);
-app.use('/', pChatRouter);
-app.use('/', login);
-app.use('/login', login);
-
-
+app.use('/ui_test',uiTest);
 
 // 以下、未整理
 
