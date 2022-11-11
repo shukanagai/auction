@@ -1,0 +1,132 @@
+.p-p_chat-main{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-rows: 92fr 8fr;
+    &__main{
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,230,244,1) 100%);
+        overflow-y: scroll;
+        height: 100%;
+    }
+    &__input{
+        display: grid;
+        height: auto;
+        padding: 1rem 0;
+        width: 100%;
+        grid-template-columns: 2.5fr 85fr 10fr 2.5fr;
+        grid-template-rows: auto;
+        background-color: #1EB1F4;
+        align-items: end;
+    }
+    &__form{
+        grid-column: 2/3;
+        grid-row: 1/2;
+        height: 2.5rem;
+        background-color: $form_color;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        padding: 0.5rem;
+        border-radius: 6px;
+    }
+    &__send{
+        grid-column: 3/4;
+        grid-row: 1/2;
+        width: 100%;
+        height: 2.5rem;
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $button_font_color;
+        &>i{
+            font-size: 1.8rem;
+        }
+    }
+
+    &__talk-box{
+        width: 80%;
+        height: max-content;        
+        display: grid;
+        grid-template-columns: 3rem auto 5rem;
+        grid-template-rows: 3rem auto;
+        padding: 10px;
+        margin-left: 1rem;
+        margin-bottom: 2rem;
+    }
+    &__icon-img{
+        grid-row: 1/2;
+        grid-column: 1/2;
+        margin: 5%;
+        width: 90%;
+        height: 90%;
+        border-radius: 3rem;
+        background-image: url(./../../img/demo_img/icon_test.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &__balloon{
+        grid-row: 2/3;
+        grid-column: 1/3;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 1rem 1rem 1rem 0;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        box-shadow: 0px 8px 16px -2px rgba(10,10,10,0.1), 0px 2px 10px 1px rgba(10,10,10,0.1);
+        word-break:break-all;
+        overflow-wrap: break-word;
+    }
+    &__post-time{
+        grid-row: 2/3;
+        grid-column: 3/4;
+        display: flex;
+        justify-content: end;
+        align-items: flex-end;
+        font-size: 1.4rem;
+    }
+    &__user-name{
+        grid-column: 2/3;
+        grid-row: 1/2;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 1rem;
+    }
+    /* 自分サイド */
+    &__talk-box-me{
+        width: 80%;
+        height: max-content;        
+        display: grid;
+        grid-template-columns: 5rem auto 4rem;
+        grid-template-rows: auto;
+        padding: 1.5rem;
+        margin-left: auto;
+        margin-right: 1rem;
+        margin-bottom: 2rem;
+    }
+    &__balloon-me{
+        grid-row: 1/2;
+        grid-column: 2/4;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 1rem 1rem 0 1rem;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        box-shadow: 0px 8px 16px -2px rgba(10,10,10,0.1), 0px 2px 10px 1px rgba(10,10,10,0.1);
+        word-break:break-all;
+        overflow-wrap: break-word;
+    }
+    &__post-time-me{
+        grid-row: 1/2;
+        grid-column: 1/2;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        font-size: 1.4rem;
+    }
+}
