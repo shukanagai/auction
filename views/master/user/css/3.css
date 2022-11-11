@@ -1,0 +1,129 @@
+@charset "UTF-8";
+/*==========-==========-==========-==========-==========*/
+/* 大略 */
+/* -------------------------------------------------- */
+#wrapper {
+  width: 100vw;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+header, main, footer {
+  padding: 15px 2.5rem;
+}
+
+/*==========-==========-==========-==========-==========*/
+/* ヘッダー */
+/* -------------------------------------------------- */
+header {
+  background-color: #7e20eb;
+  padding: 5px 2.5rem;
+  height: 70px;
+  justify-content: space-between !important;
+  padding: 0 5rem;
+}
+
+header h1 {
+  font-family: 'Yusei Magic', sans-serif;
+}
+
+header h1 a {
+  color: #fff;
+  border: transparent 1px solid;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+header h1 a:hover {
+  text-decoration: none;
+  color: #fff;
+  border-color: white;
+}
+
+header h2 {
+  color: whitesmoke;
+}
+
+/*==========-==========-==========-==========-==========*/
+/* 細部の意匠 */
+/* -------------------------------------------------- */
+input {
+  width: 150px;
+}
+
+main {
+  min-height: calc(100vh - 70px - 54px);
+}
+
+/*==========-==========-==========-==========-==========*/
+/* 3-1画面 */
+/* -------------------------------------------------- */
+#inf #contents-12 {
+  background: linear-gradient(to bottom, #1e88b9 0%, #1680b1 50px, transparent 51px, transparent);
+}
+
+#inf #contents-12 .h3-12 {
+  justify-content: start;
+}
+
+#inf #contents-12 .h3-12 h3 {
+  padding: 0 1rem;
+}
+
+#inf #contents-12 .h3-12 .this {
+  background-color: #fff;
+}
+
+#inf #contents-12 .h3-12 .that {
+  color: whitesmoke;
+}
+
+/*==========-==========-==========-==========-==========*/
+/* 3-3画面 */
+/* -------------------------------------------------- */
+#SRegister table .error {
+  color: crimson;
+}
+
+#SRegister table .input-column {
+  width: calc((50px + 16px + 3px * 2) * 3);
+  padding-right: 12px;
+}
+
+#SRegister table .input-column input {
+  width: 100%;
+}
+
+#SRegister table #gender {
+  padding-right: 12px;
+}
+
+#SRegister table #gender label {
+  width: 80px;
+  text-align: center;
+}
+
+#SRegister table #gender label [type="radio"] {
+  width: 16px;
+  height: 16px;
+}
+
+#SRegister table #birthday p {
+  padding: 3px;
+}
+
+#SRegister table #birthday p input {
+  width: 45px;
+}
+
+#SRegister table #birthday p:nth-of-type(1) input {
+  width: calc(50px + 10px);
+}
+
+#SRegister table .central {
+  width: 32px;
+}
+
+#SRegister table th, #SRegister table #birthday {
+  height: 50px;
+}

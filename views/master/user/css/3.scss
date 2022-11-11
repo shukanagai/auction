@@ -1,0 +1,123 @@
+/*==========-==========-==========-==========-==========*/
+/* 大略 */
+/* -------------------------------------------------- */
+#wrapper{
+   width: 100vw;
+   // min-width: 960px;
+   margin:0 auto;
+   min-height: 100vh;
+}
+header,main,footer{
+   padding: 15px 2.5rem;
+}
+
+
+/*==========-==========-==========-==========-==========*/
+/* ヘッダー */
+/* -------------------------------------------------- */
+header{
+   background-color: rgb(126, 32, 235);
+   h1{
+      a{
+         color: #fff;
+         &:hover{
+            text-decoration: none;
+            color: #fff;
+            border-color: white;
+         }
+         border: transparent 1px solid; // ずれ対策
+         border-radius: 3px;
+         padding: 10px;
+      }
+      font-family: 'Yusei Magic', sans-serif;
+      // margin-right: 50px;
+   }
+   padding: 5px 2.5rem;
+   height: 70px; //fontfamily変えたら65.73pxになった
+   justify-content: space-between !important;
+   h2{
+      color: whitesmoke;
+   }
+   padding: 0 5rem;
+}
+
+/*==========-==========-==========-==========-==========*/
+/* 細部の意匠 */
+/* -------------------------------------------------- */
+
+input{width: 150px;}
+main{min-height: calc(100vh - 70px - 54px);}
+
+/*==========-==========-==========-==========-==========*/
+/* 3-1画面 */
+/* -------------------------------------------------- */
+
+#inf{
+   #contents-12{
+      .h3-12{
+         justify-content: start;
+         h3{
+            padding: 0 1rem;
+         }
+         .this{
+            background-color: #fff;
+         }
+         .that{
+            color: whitesmoke;
+         }
+      }
+      background: linear-gradient(
+         to bottom,
+         rgb(30, 136, 185) 0%,
+         rgb(22, 128, 177) 50px,
+         transparent 51px,
+         transparent
+      );
+   }
+}
+
+
+/*==========-==========-==========-==========-==========*/
+/* 3-3画面 */
+/* -------------------------------------------------- */
+
+#SRegister{
+   table{
+      .error{color: crimson;}
+      .input-column{
+         // width: 212px;
+         width: calc((50px + 16px + 3px * 2) * 3); // 216px
+         input{
+            width: 100%;
+         }
+         padding-right: 12px;
+      }
+      #gender{
+         label{
+            [type="radio"]{
+               width: 16px;
+               height: 16px;
+            }
+            width: 80px;
+            text-align: center;
+         }
+         padding-right: 12px;
+      }
+      #birthday{
+         p{
+            input{
+               // width: 50px;
+               width: 45px;
+            }
+            &:nth-of-type(1) input{
+               width: calc(50px + 10px);
+            }
+            padding: 3px;
+         }
+      }
+      .central{width: 32px;}
+      th, #birthday{
+         height: 50px;
+      }
+   }
+}
