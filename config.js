@@ -1,10 +1,10 @@
 const port = 3000;
 
 const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'manabo_chat'
+  host: '3.115.111.52',
+  user: 'auction',
+  password: 'tokoro',
+  database: 'auction'
 };
 
 const userType = {
