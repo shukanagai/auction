@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8">
+	<title>オークション | ログイン</title>
+	<meta name=”robots” content=”noindex” />
+	<meta content="オークション" name="title">
+	<meta content="オンライン授業を助けるチャット型Webアプリケーション" name="description">
+	<meta content="オンライン授業" name="keywords">
+	<!-- ↓viewポートmetaタグ(スマホ画面作るためのもの、これは仮想画面、initial-scaleはスマホ画面の大きさを変えれるようにするもの、特に気にしなくていい) -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- css -->
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<!-- font-awesome -->
+	<script src="https://kit.fontawesome.com/03ebcee952.js" crossorigin="anonymous"></script>
+	<!-- jquery CDN -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- favicon -->
+	<link rel="icon" href="favicon/manabo-chat.ico">
+</head>
+
+<body>
+	<main class="p-login">
+		<h1 class="hidden">オークション | ログイン画面</h1>
+		<p class="p-login__logo"><img src="./img/logo/logo.svg" alt=""></p>
+		<p>オンライン授業をもっと便利に。</p>
+		<article class="p-login__form-block">
+			<form class="c-form" action="/" method="post">
+				<h2 class="c-form__title">Login</h2>
+				<div>
+					<label for="loginId">ログインID</label>
+					<input type="text" id="loginId" name="id">
+				</div>
+				<div>
+					<label for="password">パスワード</label>
+					<input type="password" id="loginPass" name="password">
+				</div>
+				<div>
+					<p id="error">
+						<%= alert %>
+					</p>
+				</div>
+				<button class="mt50" id="form">Login</button>
+			</form>
+		</article>
+	</main>
+	<script>
+	</script>
+	<script src="javascripts/login.js"></script>
+</body>
+
+</html>
