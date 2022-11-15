@@ -1,8 +1,8 @@
 const port = 3000;
 
 const dbConfig = {
-  host: '3.115.111.52',
-  user: 'auction',
+  host: process.env.DB_HOST | '3.115.111.52',
+  user: process.env.DB_USER | 'auction',
   password: 'tokoro',
   database: 'auction'
 };

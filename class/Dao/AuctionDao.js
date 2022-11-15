@@ -1,11 +1,6 @@
 const mysql = require('mysql2/promise');
 
-const dbConf = {
-  host: '3.115.111.52',
-  user: 'auction',
-  password: 'tokoro',
-  database: 'auction'
-};
+const dbConf = require('../../config').dbConfig;
 
 module.exports = {
   /**
