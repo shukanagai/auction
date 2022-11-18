@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>車両情報一覧</title>
 </head>
+
 <body>
     <main class="w-100 my-0 mx-auto d-flex flex-column justify-content-center mt-4">
         <h2 class="mx-auto w-75 mb-5">会員BAN</h2>
@@ -13,34 +16,35 @@
             <h3 class="d-none mx-auto w-75">検索</h3>
             <div class="card mx-auto w-75">
                 <div class="card-header">
-                  会員BAN確認
+                    会員BAN確認
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">会員情報を確認してください</h5>
                     <table class="table table-striped">
                         <tr>
-                           <th class="tableMenu">会員ID</th>
-                           <td>data01</td>
+                            <th class="tableMenu">会員ID</th>
+                            <td><%= user.US_id %></td>
                         </tr>
                         <tr>
-                           <th class="tableMenu">名前</th>
-                           <td>data03</td>
+                            <th class="tableMenu">名前</th>
+                            <td><%= user.US_name %></td>
                         </tr>
                         <tr>
-                           <th class="tableMenu">mail</th>
-                           <td>data03</td>
+                            <th class="tableMenu">mail</th>
+                            <td><%= user.US_mail %></td>
                         </tr>
                         <tr>
-                           <th class="tableMenu">tel</th>
-                           <td>data04</td>
+                            <th class="tableMenu">tel</th>
+                            <td><%= user.US_tel %></td>
                         </tr>
                     </table>
-                  <p class="card-text">会員情報をBANしてもいいですか？</p>
-                  <a href="" class="btn btn-secondary">キャンセル</a>
-                  <a href="" class="btn btn-danger ml-1"> BAN</a>
+                    <p class="card-text">会員情報をBANしてもいいですか？</p>
+                    <a href="user_list" class="btn btn-secondary">キャンセル</a>
+                    <a href="exeBan?userId=<%= user.US_id %>" class="btn btn-danger ml-1"> BAN</a>
                 </div>
             </div>
         </article>
     </main>
 </body>
+
 </html>

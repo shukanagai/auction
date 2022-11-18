@@ -25,8 +25,9 @@ module.exports = {
     /**
      * データの加工処理&データ返す処理
      */
-    console.log(rows);
-    console.log(fields);
+    // console.log(rows);
+    // console.log(fields);
+    return rows;
   },
 
   /**
@@ -84,7 +85,7 @@ module.exports = {
 }
 // .insert("hal", "hal", "hal", "M", 19991212, "大阪市", "hal@hal.ac.jp", "09099998888")
 // .update(2, "hal", "hal", "hal", "F", 19991212, "吹田市", "hal@hal.ac.jp", "09099998888")
-.ban(2)
+// .ban(2)
 // .findAll()
 ;
 
