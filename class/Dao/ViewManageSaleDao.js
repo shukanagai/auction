@@ -6,7 +6,7 @@ module.exports = {
   /**
    * 売上管理に必要なデータ
    */
-  getSaleList: async function () {
+  findAll: async function () {
     // sql
     const sql = `SELECT * FROM view_manage_sales`;
     // select実行
@@ -22,9 +22,9 @@ module.exports = {
   /**
    * 売上管理に必要なデータ（詳細情報）
    */
-  getSaleList: async function (id) {
+  findByPK: async function (id) {
     // sql
-    const sql = `SELECT * FROM view_sales_management`;
+    const sql = `SELECT * FROM view_sales_management WHERE car_id = ` + id;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
