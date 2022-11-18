@@ -4,11 +4,12 @@ const dbConf = require('../../config').dbConfig;
 
 module.exports = {
   /**
-   * 車両詳細画面に必要なデータ
+   * 車両一覧画面に必要なデータ
    */
-  getVehicleDetail: async function (auctionId) {
+  findAll: async function () {
     // sql
-    const sql = `SELECT * FROM view_vehicle_detail WHERE auctionId = ${auctionId}`;
+    const sql = "SELECT * FROM view_manage_vehicle";
+
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -20,11 +21,11 @@ module.exports = {
   },
 
   /**
-   * 車両新規登録画面のセレクトボックス用メーカー一覧を取得する
-   */
-  getMakerList: async function () {
+  * PKから会員の詳細情報を選択
+  */
+  findByPK: async function (id) {
     // sql
-    const sql = `SELECT * FROM makers`;
+    const sql = `SELECT * FROM view_manage_vehicle WHERE car_id = ` + id;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -34,5 +35,6 @@ module.exports = {
      * データの加工処理&データ返す処理
      */
   }
+
 
 }
