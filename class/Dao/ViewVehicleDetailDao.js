@@ -9,12 +9,11 @@ const dbConf = {
 
 module.exports = {
   /**
-   * 車両情報一覧画面に必要なデータ
+   * 車両詳細画面に必要なデータ
    */
-  getVehicleList: async function () {
+  getVehicleDetail: async function (auctionId) {
     // sql
-    const sql = "SELECT * FROM view_vehicle_list";
-
+    const sql = `SELECT * FROM view_vehicle_detail WHERE auctionId = ${auctionId}`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -26,12 +25,11 @@ module.exports = {
   },
 
   /**
-   * 車両情報詳細画面に必要なデータ
+   * 車両新規登録画面のセレクトボックス用メーカー一覧を取得する
    */
-  getVehicleDetail: async function (auctionId) {
+  getMakerList: async function () {
     // sql
-    const sql = `SELECT * FROM view_vehicle_detail WHERE auctionId = ${auctionId}`;
-
+    const sql = `SELECT * FROM makers`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -41,4 +39,5 @@ module.exports = {
      * データの加工処理&データ返す処理
      */
   }
-};
+
+}
