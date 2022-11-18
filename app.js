@@ -11,6 +11,8 @@ const config = require('./config');
 
 var app = express();
 
+var rtLogin = require('./routes/login');
+var rtMaster = require('./routes/master');
 var uiTest = require('./routes/ui_test');
 
 // View engine setup
@@ -23,7 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/ui_test',uiTest);
+app.use('/login', rtLogin);
+app.use('/master', rtMaster);
+app.use('/ui_test', uiTest);
 
 // 以下、未整理
 
