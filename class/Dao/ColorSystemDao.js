@@ -4,11 +4,11 @@ const dbConf = require('../../config').dbConfig;
 
 module.exports = {
    /**
-    * 車両新規登録画面のセレクトボックス用メーカー一覧を取得する
+    * 車両新規登録画面のセレクトボックス用色系統一覧を取得する
     */
    findAll: async function () {
       // sql
-      const sql = `SELECT * FROM makers`;
+      const sql = `SELECT * FROM color_systems`;
       // select実行
       const connection = await mysql.createConnection(dbConf);
       const [rows, fields] = await connection.execute(sql);
@@ -20,11 +20,11 @@ module.exports = {
    },
 
    /**
-   * PKから会員の詳細情報を選択
+   * PKから情報を選択
    */
    findByPK: async function (id) {
       // sql
-      const sql = `SELECT * FROM makers WHERE M_id = ` + id;
+      const sql = `SELECT * FROM color_systems WHERE C_id = ` + id;
       // select実行
       const connection = await mysql.createConnection(dbConf);
       const [rows, fields] = await connection.execute(sql);
