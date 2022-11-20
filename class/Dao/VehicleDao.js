@@ -36,7 +36,7 @@ module.exports = {
    */
 
   /**
-   * 車両の詳細情報を更新
+   * 車両の情報を論理削除
    */
   delete: async function (id) {
     // sql

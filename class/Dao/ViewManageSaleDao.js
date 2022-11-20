@@ -4,7 +4,7 @@ const dbConf = require('../../config').dbConfig;
 
 module.exports = {
   /**
-   * 売上管理に必要なデータ
+   * 売上管理に必要なデータ一覧を選択
    */
   findAll: async function () {
     // sql
@@ -13,25 +13,25 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
-
     /**
      * データの加工処理&データ返す処理
      */
+    return rows;
   },
 
   /**
-   * 売上管理に必要なデータ（詳細情報）
+   * PKから売上管理に必要なデータを選択
    */
   findByPK: async function (id) {
     // sql
-    const sql = `SELECT * FROM view_sales_management WHERE car_id = ` + id;
+    const sql = `SELECT * FROM view_manage_sales WHERE car_id = ` + id;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
-
     /**
      * データの加工処理&データ返す処理
      */
+    return rows;
   }
 }
