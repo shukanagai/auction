@@ -10,7 +10,13 @@ let rendObj;
 
 userRouter
   .get('/user_list', async function (req, res, next) {
-    const userList = await UserDao.findAll();
+    let userList;
+
+    if (req.query.userName != undefined) {
+      userList = await UserDao.findByName(req.query.userName);
+    } else {
+      userList = await UserDao.findAll();
+    }
 
     // ページネーション
     const page = Number(req.query.page) || 1;
