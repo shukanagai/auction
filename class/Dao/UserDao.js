@@ -39,6 +39,22 @@ module.exports = {
   },
 
   /**
+   * PKから会員の詳細情報を選択
+   */
+  findByLoginId: async function (loginId) {
+    // sql
+    const sql = `SELECT * FROM users WHERE US_login_id = '` + loginId + `'`;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    /**
+     * データの加工処理&データ返す処理
+     */
+    return rows;
+  },
+
+  /**
    * nameから会員の詳細情報を選択
    */
   findByName: async function (name) {
