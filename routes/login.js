@@ -11,7 +11,11 @@ let redPath;
 
 loginRouter
   .get('/', function (req, res, next) {
-    res.render('login.ejs', rendObj);
+    if (!req.session.loginId) {
+      res.render('login.ejs', rendObj);
+    } else {
+      res.redirect('/client/shop/top');
+    }
   })
   .post('/', async (req, res, next) => {
     const form = {
