@@ -34,6 +34,15 @@ app.use(session({
 }));
 
 app.use('/login', rtLogin);
+
+app
+  .use((req, res, next) => {
+    if (!req.session.loginId) {
+      res.redirect('/login');
+    } else {
+      next();
+    }
+  });
 app.use('/master', rtMaster);
 app.use('/ui_test', uiTest);
 app.use('/client', clientRouter);
