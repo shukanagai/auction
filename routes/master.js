@@ -67,6 +67,11 @@ userRouter
   });
 
 masterRouter
+  .use((req, res, next) => {
+    if (!req.session.isAdmin) {
+      res.redirect('../login');
+    }
+  })
   .use('/user', userRouter)
   .get('/', function (req, res, next) {
     // 社員メニューレンダリング
