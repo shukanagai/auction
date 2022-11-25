@@ -16,9 +16,7 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
-    /**
-     * データの加工処理&データ返す処理
-     */
+    // データの加工処理&データ返す処理
     return rows;
   },
 
@@ -32,14 +30,12 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
-    /**
-     * データの加工処理&データ返す処理
-     */
+    // データの加工処理&データ返す処理
     return rows;
   },
 
   /**
-   * PKから会員の詳細情報を選択
+   * ログインIDから会員の詳細情報を選択
    */
   findByLoginId: async function (loginId) {
     // sql
@@ -48,9 +44,7 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
-    /**
-     * データの加工処理&データ返す処理
-     */
+    // データの加工処理&データ返す処理
     return rows;
   },
 
@@ -64,9 +58,7 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
-    /**
-     * データの加工処理&データ返す処理
-     */
+    // データの加工処理&データ返す処理
     return rows;
   },
 
@@ -116,5 +108,40 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
     await connection.end();
+  },
+
+  /**
+   * ログイン可能かどうかの確認
+   */
+  loginCheck: async function (loginId, password) {
+    // sql
+    const sql = `SELECT * FROM users WHERE US_login_id = '${loginId}' AND US_password = '${password}'`;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    // データの加工処理&データ返す処理
+    if(rows.length > 0 && rows[0].US_state == 0) return true
+    return false
+  },
+
+  /**
+   * BANされているかどうかの確認
+   */
+  // banCheck: async function (loginId) {
+  // findStateById: async function (loginId) {
+  stateCheck: async function (loginId, password) {
+    // sql
+    const sql = `SELECT * FROM users WHERE US_login_id = '${loginId}' AND US_password = '${password}'`;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    // データの加工処理&データ返す処理
+    if(rows.length == 0) return -1;
+    if(rows[0].US_state == 0) return 0
+    if(rows[0].US_state == 1) return 1
+    if(rows[0].US_state == 2) return 2
+    return 2
   }
 }
