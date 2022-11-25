@@ -10,12 +10,9 @@ let viewPath;
 let redPath;
 
 loginRouter
-  .get('/', function (req, res, next) {
-    if (!req.session.loginId) {
-      res.render('login.ejs', rendObj);
-    } else {
-      res.redirect('/client/shop/top');
-    }
+  .get('/', async function (req, res, next) {
+    req.session.destroy();
+    res.render('login.ejs', rendObj);
   })
   .post('/', async (req, res, next) => {
     const form = {
@@ -30,12 +27,25 @@ loginRouter
       if (user && form.pass == user.US_password) {
         // 認証成功
         req.session.loginId = form.loginId;
-        if (user.US_ban == 0) {
-          // BANされてない
-          // 仕様書上「オークションTOP」
-          redPath = 'client/shop/top';
-        } else {
-          redPath = 'client/user/fail';
+        switch (user.US_state) {
+          case 0:
+            // BANされてない
+            // 仕様書上「オークションTOP」
+            req.session.isBan = false;
+            redPath = 'client/shop/top';
+            break;
+          case 1:
+            req.session.isBan = true;
+            redPath = 'client/user/fail';
+            break;
+          case 2:
+            // 管理者
+            req.session.isBan = false;
+            req.session.isAdmin = true;
+            redPath = 'master/top';
+            break;
+          default:
+            break;
         }
       } else {
         // 認証失敗
