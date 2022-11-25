@@ -6,13 +6,13 @@ module.exports = {
   /**
    * 車両の基本情報を新規登録
    */
-  insert: async function (name, makerId, mileage, colorId, passenger) {
+  insert: async function (name, makerId, mileage, colorId, transmission, bodyTypeId, passenger, handle) {
     const connection = await mysql.createConnection(dbConf);
     // insert実行
-    let sql = `INSERT INTO vehicles (V_name, V_maker_id, V_mileage, V_color_system_id, V_delete_flag) VALUES('${name}', ${makerId}, ${mileage}, ${colorId}, 0)`;
-    const [rows] = await connection.query(sql);
+    let sql = `INSERT INTO vehicles (V_name, V_maker_id, V_mileage, V_color_system_id, V_transmission, V_body_type_id, V_delete_flag) VALUES('${name}', ${makerId}, ${mileage}, ${colorId}, ${transmission}, ${bodyTypeId}, 0)`;
+    await connection.query(sql);
     // insert実行
-    sql = `INSERT INTO vehicle_details (VD_vehicle_id, VD_passenger) VALUES('${rows.insertId}', ${passenger})`;
+    sql = `INSERT INTO vehicle_details (VD_vehicle_id, VD_passenger, VD_handle) VALUES('${rows.insertId}', ${passenger}, ${handle})`;
     await connection.query(sql);
     await connection.end();
   },
@@ -32,10 +32,6 @@ module.exports = {
   },
 
   /**
-   * 車両の詳細情報を更新
-   */
-
-  /**
    * 車両の情報を論理削除
    */
   delete: async function (id) {
@@ -45,5 +41,27 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
     await connection.end();
+  },
+
+  /**
+   * 車両の詳細情報を新規登録
+   * 使わないでよい
+   */
+  insertAll: async function (name, makerId, mileage, colorId, passenger) {
+    const connection = await mysql.createConnection(dbConf);
+    // insert実行
+    let sql = `INSERT INTO vehicles (V_name, V_maker_id, V_mileage, V_color_system_id, V_delete_flag) VALUES('${name}', ${makerId}, ${mileage}, ${colorId}, 0)`;
+    const [rows] = await connection.query(sql);
+    // insert実行
+    sql = `INSERT INTO vehicle_details (VD_vehicle_id, VD_passenger) VALUES('${rows.insertId}', ${passenger})`;
+    await connection.query(sql);
+    await connection.end();
   }
+
+  /**
+   * 車両の詳細情報を更新
+   * 使わないでよい
+   */
+
+
 }
