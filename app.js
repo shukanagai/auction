@@ -14,6 +14,7 @@ var app = express();
 
 const rtIndex = require('./routes/index');
 const rtLogin = require('./routes/login');
+const rtAdd = require('./routes/add');
 const rtMaster = require('./routes/master');
 const uiTest = require('./routes/ui_test');
 const clientRouter = require('./routes/client');
@@ -34,6 +35,8 @@ app.use(session({
 }));
 
 app.use('/login', rtLogin);
+
+app.use('/add', rtAdd);
 
 app
   .use((req, res, next) => {
