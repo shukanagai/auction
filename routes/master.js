@@ -131,7 +131,7 @@ carsRouter
     const color = await ColorSystemDao.findByPK(carInfo.colorId);
 
     rendObj = {
-      carImgPath: `../../../../img/car_img/${carInfo.carImgFileName}`,
+      carImgPath: carInfo.carImgFileName,
       carName: carInfo.carName,
       makerName: maker.M_name,
       bodyTypeName: bodyType.B_name,
