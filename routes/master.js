@@ -95,10 +95,16 @@ carsRouter
 
     // 車両登録画面
     rendObj = {
-      // register_inputにアクセスした際の選択肢(色、メーカーなど)を指定
+      carName: req.session.carRegister ? req.session.carRegister.carName : "",
       makerArr: maker,
+      makerSelected: req.session.carRegister ? req.session.carRegister.makerId : "0",
+      bodyTypeArr: bodyType,
+      bodyTypeSelected: req.session.carRegister ? req.session.carRegister.bodyTypeId : "0",
+      passengerSelected: req.session.carRegister ? req.session.carRegister.passenger : "0",
+      mileage: req.session.carRegister ? req.session.carRegister.mileage : "",
       colorArr: color,
-      bodyTypeArr: bodyType
+      colorSelected: req.session.carRegister ? req.session.carRegister.colorId : "",
+      startPrice: req.session.carRegister ? req.session.carRegister.startPrice : ""
     };
     res.render(`master/cars/register_input.ejs`, rendObj);
   })
@@ -123,7 +129,7 @@ carsRouter
     // res.render(`master/cars/register_confirm.ejs`, rendObj);
     res.redirect(`./register_confirm`);
   })
-  .get('/register_confirm', async (req, res, next)=>{
+  .get('/register_confirm', async (req, res, next) => {
     const carInfo = req.session.carRegister;
 
     const maker = await MakerDao.findByPK(carInfo.makerId);
