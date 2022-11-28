@@ -8,7 +8,6 @@ let rendObj = {
 
 let viewPath;
 let redPath;
-
 loginRouter
   .get('/', async function (req, res, next) {
     req.session.destroy();
