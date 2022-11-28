@@ -32,6 +32,6 @@ module.exports = {
     /**
      * データの加工処理&データ返す処理
      */
-    return rows;
+    return rows[0];
   }
 }
