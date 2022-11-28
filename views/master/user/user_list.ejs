@@ -47,8 +47,8 @@
                             <%= userList[i].US_tel %>
                         </td>
                         <td>
-                            <a href="user_ban?userId=<%= userList[i].US_id %>" class="btn btn-<%= userList[i].US_ban == 0 ? 'danger' : 'success' %>">
-                                <%= userList[i].US_ban==0 ? 'Ban' : 'UnBan' %>
+                            <a href="user_ban?userId=<%= userList[i].US_id %>" class="btn btn-<%= userList[i].US_state == 0 ? 'danger' : 'success' %>">
+                                <%= userList[i].US_state==0 ? 'Ban' : 'UnBan' %>
                             </a>
                         </td>
                     </tr>

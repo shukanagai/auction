@@ -7,7 +7,7 @@ const UserDao = require('../class/Dao/UserDao');
 addRouter
   // 会員新規登録画面のejsファイルをレンダリング（HTMLに変換してレスポンスを返す）
   .get('/', (req, res, next) => {
-    res.render("/add.ejs");
+    res.render("./add.ejs");
   })
 
   // 会員新規登録の処理
