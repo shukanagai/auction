@@ -1,5 +1,7 @@
 const express = require('express');
 const multer = require('multer');
+const path = require('path');
+const AuctionDao = require('../../class/Dao/AuctionDao');
 const MakerDao = require('../../class/Dao/MakerDao');
 const VehicleDao = require('../../class/Dao/VehicleDao');
 const ColorSystemDao = require('../../class/Dao/ColorSystemDao');
@@ -91,9 +93,9 @@ carsRouter
   })
   .post('/register_confirm', async (req, res, next) => {
     const carInfo = req.session.carRegister;
-    // インサート
-    // 11/27 仕様調整
-    await VehicleDao.insert(
+
+    // Vehicleテーブル登録
+    const insertId = await VehicleDao.insert(
       carInfo.carName,
       carInfo.makerId,
       carInfo.mileage,
@@ -101,8 +103,17 @@ carsRouter
       null,
       carInfo.bodyTypeId,
       carInfo.passenger,
-      null
+      "未設定"
     );
+
+    // Auctionテーブル登録
+    await AuctionDao.insert(
+      insertId,
+      carInfo.startTime,
+      carInfo.startPrice,
+      carInfo.endTime
+    );
+
     // セッションから車両情報削除
     req.session.carRegister = null;
     res.redirect(`./car_list`);
