@@ -65,6 +65,7 @@ carsRouter
 
     // セッションに保存
     req.session.carRegister = inputCarInfo;
+    console.log(inputCarInfo);
 
     // res.render(`master/cars/register_confirm.ejs`, rendObj);
     res.redirect(`./register_confirm`);
@@ -94,7 +95,7 @@ carsRouter
   .post('/register_confirm', async (req, res, next) => {
     const carInfo = req.session.carRegister;
 
-    // Vehicleテーブル登録
+    // vehicleテーブル登録
     const insertId = await VehicleDao.insert(
       carInfo.carName,
       carInfo.makerId,
@@ -103,10 +104,11 @@ carsRouter
       null,
       carInfo.bodyTypeId,
       carInfo.passenger,
-      "未設定"
+      "未設定",
+      carInfo.carImgFileName
     );
 
-    // Auctionテーブル登録
+    // auctionテーブル登録
     await AuctionDao.insert(
       insertId,
       carInfo.startTime,
