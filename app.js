@@ -40,10 +40,17 @@ app.use('/add', rtAdd);
 
 app
   .use((req, res, next) => {
-    if (!req.session.loginId || req.path != '/favicon.ico') {
-      res.redirect('/login');
-    } else if(req.path == `add` || req.path == `edit`){
+    if (req.path == 'add' || req.path == 'edit') {
       res.render(`${req.path}.ejs`);
+    } else {
+      next();
+    }
+  })
+
+app
+  .use((req, res, next) => {
+    if (!req.session.loginId) {
+      res.redirect('/login');
     } else {
       next();
     }
