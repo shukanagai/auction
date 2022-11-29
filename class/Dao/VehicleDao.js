@@ -12,9 +12,10 @@ module.exports = {
     let sql = `INSERT INTO vehicles (V_name, V_maker_id, V_mileage, V_color_system_id, V_transmission, V_body_type_id, V_delete_flag) VALUES('${name}', ${makerId}, ${mileage}, ${colorId}, ${transmission}, ${bodyTypeId}, 0)`;
     const [rows] = await connection.query(sql);
     // insert実行
-    sql = `INSERT INTO vehicle_details (VD_vehicle_id, VD_passenger, VD_handle) VALUES('${rows.insertId}', ${passenger}, ${handle})`;
+    sql = `INSERT INTO vehicle_details (VD_vehicle_id, VD_passenger, VD_handle) VALUES('${rows.insertId}', ${passenger}, '${handle}')`;
     await connection.query(sql);
     await connection.end();
+    return rows.insertId;
   },
 
   /**

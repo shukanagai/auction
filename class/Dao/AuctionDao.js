@@ -1,6 +1,7 @@
 const mysql = require('mysql2/promise');
 
 const dbConf = require('../../config').dbConfig;
+const ADMIN_USER_ID = 2;
 
 module.exports = {
   /**
@@ -56,7 +57,7 @@ module.exports = {
    */
   insert: async function (vehicleId, startDatetime, startPrice, endDatetime) {
     // sql
-    const sql = `INSERT INTO auctions (AU_vehicle_id, AU_user_id, AU_start_datetime, AU_start_price, AU_end_datetime, AU_end_price) VALUES(${vehicleId}, -1, ${startDatetime}, ${startPrice}, ${endDatetime}, -1)`;
+    const sql = `INSERT INTO auctions (AU_vehicle_id, AU_user_id, AU_start_datetime, AU_start_price, AU_end_datetime, AU_end_price) VALUES(${vehicleId}, ${ADMIN_USER_ID}, '${startDatetime}', ${startPrice}, '${endDatetime}', -1)`;
     // insert実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
