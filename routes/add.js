@@ -12,7 +12,8 @@ addRouter
 
   // 会員新規登録の処理
   .post('/clientInsert', async (req, res, next) => {
-    await UserDao.insert(req.body.name, req.body.loginId, req.body.password, req.body.gender, req.body.birthday, req.body.address, req.body.mail, req.body.tel);
+    const param = req.body;
+    await UserDao.insert(param.usName, param.usLoginId, param.usPassword, param.usGender, param.usBirthday, param.usAddress, param.usMail, param.usTel);
     res.redirect('../../login');
   })
 ;

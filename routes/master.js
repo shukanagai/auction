@@ -14,24 +14,32 @@ masterRouter
     }
     next();
   })
+
+// 会員管理
   .use('/user', userRouter)
+// 車両管理
   .use('/cars', carsRouter)
+
+// 社員メニューレンダリング
   .get('/top', function (req, res, next) {
-    // 社員メニューレンダリング
     res.render(`master/top.ejs`);
   })
+
+// 車両管理レンダリング
   .get('/cars/*', function (req, res, next) {
-    // 車両管理レンダリング
     res.render(`master${req.path}.ejs`);
   })
+
+// 売上管理レンダリング
   // .get('/sales/*', function (req, res, next) {
-  //   // 売上管理レンダリング
   //   res.render(`master${req.path}.ejs`);
   // })
+
+// デフォルトレンダリング
   .get('/*', function (req, res, next) {
-    // デフォルトレンダリング
     console.log(`該当なし : ${req.path}`);
     res.render(`master${req.path}.ejs`);
-  });
+  })
+;
 
 module.exports = masterRouter;

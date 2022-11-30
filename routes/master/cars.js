@@ -4,6 +4,7 @@ const path = require('path');
 const AuctionDao = require('../../class/Dao/AuctionDao');
 const MakerDao = require('../../class/Dao/MakerDao');
 const VehicleDao = require('../../class/Dao/VehicleDao');
+const ViewManageVehicleDao = require('../../class/Dao/ViewManageVehicleDao');
 const ColorSystemDao = require('../../class/Dao/ColorSystemDao');
 const BodyTypeDao = require('../../class/Dao/BodyTypeDao');
 
@@ -25,6 +26,14 @@ const uploads = multer({
 let rendObj;
 
 carsRouter
+// 車両一覧画面
+  .get('/car_list', async (req, res, next) => {
+    rendObj = await ViewManageVehicleDao.findAll();
+    res.render('../../car_list.ejs', rendObj);
+  })
+
+
+// 登録画面
   .get('/register_input', async (req, res, next) => {
     // メーカー一覧
     const maker = await MakerDao.findAll();
@@ -120,6 +129,15 @@ carsRouter
     req.session.carRegister = null;
     res.redirect(`./car_list`);
   })
+
+
+// 更新画面
+
+
+// 削除画面
+
+
+// DEFAULT
   .get('/*', (req, res, next) => {
     console.log(`該当なし${req.path}`);
     res.render(`master/cars${req.path}.ejs`);
