@@ -34,19 +34,22 @@ app.use(session({
   saveUninitialized: false
 }));
 
+// ログイン画面
 app.use('/login', rtLogin);
 
+// 会員新規登録画面
 app.use('/add', rtAdd);
 
 app
-  .use((req, res, next) => {
-    if (req.path == 'add' || req.path == 'edit') {
-      res.render(`${req.path}.ejs`);
-    } else {
-      next();
-    }
-  })
+.use((req, res, next) => {
+  if (req.path == 'add' || req.path == 'edit') {
+    res.render(`${req.path}.ejs`);
+  } else {
+    next();
+  }
+})
 
+// ログインチェック（ログインフィルター）
 app
   .use((req, res, next) => {
     if (!req.session.loginId) {
