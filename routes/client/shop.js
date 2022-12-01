@@ -2,8 +2,8 @@ var express = require('express');
 
 const shopRouter = express.Router({ mergeParams: true });
 
-const UserDao = require('../class/Dao/UserDao');
-const AuctionDao = require('../class/Dao/AuctionDao');
+const UserDao = require('../../class/Dao/UserDao');
+const AuctionDao = require('../../class/Dao/AuctionDao');
 
 let rendObj;
 

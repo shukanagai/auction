@@ -20,12 +20,20 @@ const dbConf = {
 })();
 */
 
+/* 
 (async () =>{
   console.log(
     await require('./UserDao').loginCheck("hal", "hal")
   );
 })();
-
+ */
 
 // INSERT INTO vehicles (V_name, V_maker_id, V_mileage, V_color_system_id, V_transmission, V_body_type_id, V_delete_flag) VALUES('${name}', ${makerId}, ${mileage}, ${colorId}, ${transmission}, ${bodyTypeId}, 0)
 // INSERT INTO vehicle_details (VD_vehicle_id, VD_passenger, VD_handle) VALUES('${rows.insertId}', ${passenger}, ${handle})
+
+
+(async () =>{
+  console.log(
+    await require('./AuctionDao').findAll()
+  );
+})();
