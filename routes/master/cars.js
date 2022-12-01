@@ -104,7 +104,7 @@ carsRouter
   .post('/register_confirm', async (req, res, next) => {
     const carInfo = req.session.carRegister;
 
-    // vehicleテーブル登録
+    // vehiclesテーブル登録
     const insertId = await VehicleDao.insert(
       carInfo.carName,
       carInfo.makerId,
@@ -117,7 +117,7 @@ carsRouter
       carInfo.carImgFileName
     );
 
-    // auctionテーブル登録
+    // auctionsテーブル登録
     await AuctionDao.insert(
       insertId,
       carInfo.startTime,
