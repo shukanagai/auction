@@ -11,7 +11,7 @@ shopRouter
 // TOP画面レンダリング
   .get('/top', async (req, res, next) => {
     rendObj = await AuctionDao.findAll();
-    res.render('../../top.ejs', rendObj);
+    res.render('client/shop/top.ejs', rendObj);
   })
 
 

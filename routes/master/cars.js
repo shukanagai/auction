@@ -29,7 +29,7 @@ carsRouter
 // 車両一覧画面
   .get('/car_list', async (req, res, next) => {
     rendObj = await ViewManageVehicleDao.findAll();
-    res.render('../../car_list.ejs', rendObj);
+    res.render('master/cars/car_list.ejs', rendObj);
   })
 
 
