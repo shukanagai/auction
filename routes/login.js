@@ -14,6 +14,8 @@ loginRouter
     res.render('login.ejs', rendObj);
   })
   .post('/', async (req, res, next) => {
+    viewPath = '';
+    redPath = '';
     const form = {
       loginId: req.body.userId,
       pass: req.body.password
@@ -35,7 +37,8 @@ loginRouter
             break;
           case 1:
             req.session.isBan = true;
-            redPath = 'client/user/fail';
+            // redPath = 'client/user/fail';
+            viewPath = 'client/user/fail.ejs';
             break;
           case 2:
             // 管理者

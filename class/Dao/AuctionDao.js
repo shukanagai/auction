@@ -1,6 +1,10 @@
 const mysql = require('mysql2/promise');
 
 const dbConf = require('../../config').dbConfig;
+const ADMIN_USER_ID = 2;
+
+// date_formatした全カラム
+const all = "AU_vehicle_id, AU_user_id, DATE_FORMAT(AU_start_datetime, '%Y-%m-%d %H:%i:%s') AS AU_start_datetime, DATE_FORMAT(AU_end_datetime, '%Y-%m-%d %H:%i:%s') AS AU_end_datetime, AU_start_price, AU_end_price"
 
 module.exports = {
   /**
@@ -8,7 +12,8 @@ module.exports = {
    */
   findAll: async function () {
     // sql
-    const sql = `SELECT * FROM auctions`;
+    // const sql = `SELECT * FROM auctions`;
+    const sql = `SELECT ${all} FROM auctions`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -24,7 +29,7 @@ module.exports = {
    */
   findByPK: async function (id) {
     // sql
-    const sql = `SELECT * FROM auctions WHERE AU_vehicle_id = ` + id;
+    const sql = `SELECT ${all} FROM auctions WHERE AU_vehicle_id = ` + id;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -56,7 +61,7 @@ module.exports = {
    */
   insert: async function (vehicleId, startDatetime, startPrice, endDatetime) {
     // sql
-    const sql = `INSERT INTO auctions (AU_vehicle_id, AU_user_id, AU_start_datetime, AU_start_price, AU_end_datetime, AU_end_price) VALUES(${vehicleId}, -1, ${startDatetime}, ${startPrice}, ${endDatetime}, -1)`;
+    const sql = `INSERT INTO auctions (AU_vehicle_id, AU_user_id, AU_start_datetime, AU_start_price, AU_end_datetime, AU_end_price) VALUES(${vehicleId}, ${ADMIN_USER_ID}, '${startDatetime}', ${startPrice}, '${endDatetime}', -1)`;
     // insert実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);

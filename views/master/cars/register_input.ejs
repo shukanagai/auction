@@ -22,16 +22,16 @@
 
                 <section class="mb-3 w-100">
                     <label class="form-label">車種名</label>
-                    <input type="text" class="form-control" name="carName" required>
+                    <input type="text" class="form-control" name="carName" value="<%= carName %>" required>
                 </section>
 
                 <section class="form-group mb-3">
                     <label for="select1 mb-3">メーカー</label>
                     <select id="select1" name="makerId" class="form-select w-100" required>
-                        <option selected>選択して下さい</option>
+                        <option <%= makerSelected == 0 ? "selected" : "" %>>選択して下さい</option>
                         <!-- メーカーDAOからレンダリング -->
                         <% makerArr.forEach( maker => { %>
-                            <option value="<%= maker.M_id %>"><%= maker.M_name %></option>
+                            <option value="<%= maker.M_id %>" <%= makerSelected == maker.M_id ? "selected" : "" %>><%= maker.M_name %></option>
                         <% }); %>
                     </select>
                 </section>
@@ -39,10 +39,10 @@
                 <section class="form-group mb-3">
                     <label for="select1 mb-3">車両タイプ</label>
                     <select id="select1" name="bodyTypeId" class="form-select w-100" required>
-                        <option selected>選択して下さい</option>
+                        <option <%= bodyTypeSelected == 0 ? "selected" : "" %>>選択して下さい</option>
                         <!-- bodytypeDAOからレンダリング -->
                         <% bodyTypeArr.forEach( bodyType => { %>
-                            <option value="<%= bodyType.B_id %>"><%= bodyType.B_name %></option>
+                            <option value="<%= bodyType.B_id %>" <%= bodyTypeSelected == bodyType.B_id ? "selected" : "" %>><%= bodyType.B_name %></option>
                         <% }); %>
                     </select>
                 </section>
@@ -50,15 +50,10 @@
                 <section class="form-group mb-3">
                     <label for="select1 mb-3">定員</label>
                     <select id="select1" name="passenger" class="form-select w-100" required>
-                        <option selected>選択して下さい</option>
-                        <option value="1">1人</option>
-                        <option value="2">2人</option>
-                        <option value="3">3人</option>
-                        <option value="4">4人</option>
-                        <option value="5">5人</option>
-                        <option value="6">6人</option>
-                        <option value="7">7人</option>
-                        <option value="8">8人</option>
+                        <option <%= passengerSelected == 0 ? "selected" : "" %>>選択して下さい</option>
+                        <% for (let i = 1; i < 9; i++) { %>
+                            <option value="<%= i %>" <%= passengerSelected == i ? "selected" : "" %>><%= i %>人</option>
+                        <% } %>
                     </select>
                 </section>
 
@@ -76,7 +71,7 @@
 
                 <section class="form-group mb-3">
                     <label class="form-label">走行距離</label>
-                    <input type="number" class="form-control" name="mileage" required>
+                    <input type="number" class="form-control" name="mileage" value="<%= mileage %>" required>
                 </section>
 
                 <!-- <section class="mb-3 w-100">
@@ -87,10 +82,10 @@
                 <section class="form-group mb-3">
                     <label for="select1 mb-3">ベースカラー</label>
                     <select id="select1" name="colorId" class="form-select w-100" required>
-                        <option selected>選択して下さい</option>
+                        <option <%= colorSelected == 0 ? "selected" : "" %>>選択して下さい</option>
                         <!-- ColorSystemDaoからレンダリング -->
                         <% colorArr.forEach( color => { %>
-                            <option value="<%= color.C_id %>"><%= color.C_name %></option>
+                            <option value="<%= color.C_id %>" <%= colorSelected == color.C_id ? "selected" : "" %>><%= color.C_name %></option>
                         <% }); %>
                         <!-- <option value="1">1年</option>
                         <option value="2">2年</option>
@@ -112,7 +107,7 @@
 
                 <section class="mb-3 w-100">
                     <label class="form-label">開始価格</label>
-                    <input type="number" class="form-control" name="startPrice" required>
+                    <input type="number" class="form-control" name="startPrice" value="<%= startPrice %>" required>
                 </section>
 
                 <div class="mx-auto w-75">
