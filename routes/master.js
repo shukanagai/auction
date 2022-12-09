@@ -6,6 +6,7 @@ const MakerDao = require('../class/Dao/MakerDao');
 const VehicleDao = require('../class/Dao/VehicleDao');
 const ColorSystemDao = require('../class/Dao/ColorSystemDao');
 const BodyTypeDao = require('../class/Dao/BodyTypeDao');
+const ViewManageSaleDao = require('../class/Dao/ViewManageSaleDao');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -168,6 +169,31 @@ carsRouter
     res.render(`master/cars${req.path}.ejs`);
   });
 
+salesRouter.get('/sales', async (req, res, next) => {
+  const salesInfos = await ViewManageSaleDao.findAll();
+
+  let sum = 0;
+  salesInfos.forEach((salesInfo) => {
+    sum = sum + salesInfo.end_price;
+  });
+  
+  // ページネーション
+  const page = Number(req.query.page) || 1;
+  const pager = {
+    start: page * 10 - 10,
+    end: page * 10
+  };
+
+  rendObj = {
+    salesInfos: salesInfos.slice(pager.start, pager.end),
+    pageLength: Math.ceil(salesInfos.length / 10),
+    currentPage: page,
+    sum: sum,
+  };
+  
+  res.render(`master/sales/sales.ejs`, rendObj);
+})
+
 masterRouter
   .use((req, res, next) => {
     if (!req.session.isAdmin) {
@@ -177,18 +203,11 @@ masterRouter
   })
   .use('/user', userRouter)
   .use('/cars', carsRouter)
+  .use('/sales', salesRouter)
   .get('/top', function (req, res, next) {
     // 社員メニューレンダリング
     res.render(`master/top.ejs`);
   })
-  .get('/cars/*', function (req, res, next) {
-    // 車両管理レンダリング
-    res.render(`master${req.path}.ejs`);
-  })
-  // .get('/sales/*', function (req, res, next) {
-  //   // 売上管理レンダリング
-  //   res.render(`master${req.path}.ejs`);
-  // })
   .get('/*', function (req, res, next) {
     // デフォルトレンダリング
     console.log(`該当なし : ${req.path}`);
