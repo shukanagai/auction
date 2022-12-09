@@ -35,7 +35,8 @@ loginRouter
             break;
           case 1:
             req.session.isBan = true;
-            redPath = 'client/user/fail';
+            // redPath = 'client/user/fail';
+            viewPath = 'client/user/fail.ejs';
             break;
           case 2:
             // 管理者
