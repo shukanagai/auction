@@ -14,6 +14,8 @@ loginRouter
     res.render('login.ejs', rendObj);
   })
   .post('/', async (req, res, next) => {
+    viewPath = '';
+    redPath = '';
     const form = {
       loginId: req.body.userId,
       pass: req.body.password
