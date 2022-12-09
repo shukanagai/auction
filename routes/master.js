@@ -1,11 +1,41 @@
 const express = require('express');
 
+const multer = require('multer');
+const path = require('path');
+const ViewManageSaleDao = require('../class/Dao/ViewManageSaleDao');
+
 const masterRouter = express.Router();
 const userRouter = require('./master/user');
 const carsRouter = require('./master/cars');
 const salesRouter = express.Router({ mergeParams: true });
 
 let rendObj;
+
+salesRouter.get('/sales', async (req, res, next) => {
+  const salesInfos = await ViewManageSaleDao.findAll();
+
+  let sum = 0;
+  salesInfos.forEach((salesInfo) => {
+    sum = sum + salesInfo.end_price;
+  });
+  
+  // ページネーション
+  const page = Number(req.query.page) || 1;
+  const pager = {
+    start: page * 10 - 10,
+    end: page * 10
+  };
+
+  rendObj = {
+    salesInfos: salesInfos.slice(pager.start, pager.end),
+    pageLength: Math.ceil(salesInfos.length / 10),
+    currentPage: page,
+    sum: sum,
+  };
+  
+  res.render(`master/sales/sales.ejs`, rendObj);
+})
+
 
 masterRouter
   .use((req, res, next) => {
@@ -26,14 +56,7 @@ masterRouter
   })
 
 // 車両管理レンダリング
-  .get('/cars/*', function (req, res, next) {
-    res.render(`master${req.path}.ejs`);
-  })
-
-// 売上管理レンダリング
-  // .get('/sales/*', function (req, res, next) {
-  //   res.render(`master${req.path}.ejs`);
-  // })
+  .use('/sales', salesRouter)
 
 // デフォルトレンダリング
   .get('/*', function (req, res, next) {
