@@ -8,7 +8,7 @@ module.exports = {
    */
   findAll: async function () {
     // sql
-    const sql = "SELECT * FROM view_manage_vehicles";
+    const sql = "SELECT * FROM view_show_vehicles";
 
     // select実行
     const connection = await mysql.createConnection(dbConf);
@@ -24,7 +24,7 @@ module.exports = {
   */
   findByPK: async function (id) {
     // sql
-    const sql = `SELECT * FROM view_manage_vehicles WHERE car_id = ` + id;
+    const sql = `SELECT * FROM view_show_vehicles WHERE car_id = ` + id;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -38,7 +38,7 @@ module.exports = {
    */
   findByName: async function (name, maker, color, transmission, bodyType, passenger) {
     // sql
-    const sql = `SELECT * FROM view_manage_vehicles`;
+    const sql = `SELECT * FROM view_show_vehicles`;
     sql += ` WHERE car_name LIKE '%${name}%'`;
     if(maker != null) sql += ` AND car_maker = ${maker}`;
     if(color != null) sql += ` AND car_color = ${color}`;
@@ -59,7 +59,7 @@ module.exports = {
    */
   findAllPerPage: async function (pageNum) {
     // sql
-    const sql = `SELECT * FROM view_manage_vehicles LIMIT ${pageNum-1},10`;
+    const sql = `SELECT * FROM view_show_vehicles LIMIT ${pageNum-1},10`;
 
     // select実行
     const connection = await mysql.createConnection(dbConf);
@@ -75,7 +75,7 @@ module.exports = {
    */
   countPageNum: async function () {
     // sql
-    const sql = `SELECT COUNT(*) FROM view_manage_vehicles`;
+    const sql = `SELECT COUNT(*) FROM view_show_vehicles`;
 
     // select実行
     const connection = await mysql.createConnection(dbConf);
