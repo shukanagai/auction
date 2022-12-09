@@ -129,6 +129,12 @@ carsRouter
     req.session.carRegister = null;
     res.redirect(`./car_list`);
   })
+  .get('/delete', async (req, res, next) => {
+    //車両Id
+    const carId = req.query.carId;
+    VehicleDao.delete(carId);
+    res.redirect(`./car_list`);
+  })
 
 
 // 更新画面
