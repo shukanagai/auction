@@ -57,27 +57,10 @@
                     </select>
                 </section>
 
-                <!-- <section class="form-group mb-3">
-                    <label for="select1 mb-3">走行年数</label>
-                    <select id="select1" name="drivingYears" class="form-select w-100" required>
-                        <option selected>選択して下さい</option>
-                        <option value="1">1年</option>
-                        <option value="2">2年</option>
-                        <option value="3">3年</option>
-                        <option value="4">4年</option>
-                        <option value="5">5年</option>
-                    </select>
-                </section> -->
-
                 <section class="form-group mb-3">
                     <label class="form-label">走行距離</label>
                     <input type="number" class="form-control" name="mileage" value="<%= mileage %>" required>
                 </section>
-
-                <!-- <section class="mb-3 w-100">
-                    <label class="form-label">ベースカラー</label>
-                    <input type="text" class="form-control" name="baseColor" required>
-                </section> -->
 
                 <section class="form-group mb-3">
                     <label for="select1 mb-3">ベースカラー</label>
@@ -87,11 +70,6 @@
                         <% colorArr.forEach( color => { %>
                             <option value="<%= color.C_id %>" <%= colorSelected == color.C_id ? "selected" : "" %>><%= color.C_name %></option>
                         <% }); %>
-                        <!-- <option value="1">1年</option>
-                        <option value="2">2年</option>
-                        <option value="3">3年</option>
-                        <option value="4">4年</option>
-                        <option value="5">5年</option> -->
                     </select>
                 </section>
 

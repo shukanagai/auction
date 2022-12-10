@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const AuctionDao = require('../../class/Dao/AuctionDao');
 const MakerDao = require('../../class/Dao/MakerDao');
 const VehicleDao = require('../../class/Dao/VehicleDao');
@@ -26,14 +27,89 @@ const uploads = multer({
 let rendObj;
 
 carsRouter
-// 車両一覧画面
+  // 車両一覧画面
   .get('/car_list', async (req, res, next) => {
-    rendObj = await ViewManageVehicleDao.findAll();
+    // ページネーション
+    const page = Number(req.query.page) || 1;
+    result = await ViewManageVehicleDao.findAllPerPage(page);
+    // 画像ファイルチェック(存在しないならno_img.png表示)
+    for (const car of result) {
+      if (!fs.existsSync(`public/img/car_img/${car.car_img_path}`)) {
+        car.car_img_path = 'no_img.png';
+      }
+    }
+    rendObj = {
+      carList: result
+    }
     res.render('master/cars/car_list.ejs', rendObj);
   })
 
+  // 車両情報編集表示
+  .get('/edit_input', async (req, res, next)=>{
+    const carInfo = await VehicleDao.findByPK(req.query.carId);
+    const viewCarInfo = await ViewManageVehicleDao.findByPK(req.query.carId);
+    const auctionInfo = await AuctionDao.findByPK(req.query.carId);
+    const maker = await MakerDao.findAll();
+    const bodyType = await BodyTypeDao.findAll();
+    const color = await ColorSystemDao.findAll();
 
-// 登録画面
+    rendObj = {
+      carId: req.query.carId,
+      carImgFileName: viewCarInfo.car_img_path,
+      carName: carInfo.V_name,
+      makerArr: maker,
+      makerName: viewCarInfo.car_maker,
+      makerSelected: carInfo.V_maker_id,
+      bodyTypeArr: bodyType,
+      bodyTypeSelected: carInfo.V_body_type_id,
+      passengerSelected: viewCarInfo.car_passenger,
+      mileage: carInfo.V_mileage,
+      colorArr: color,
+      colorName: viewCarInfo.car_color,
+      colorSelected: carInfo.V_color_system_id,
+      startTime: auctionInfo.AU_start_datetime,
+      viewStartTime: viewCarInfo.auction_start_datetime,
+      endTime: auctionInfo.AU_end_datetime,
+      viewEndTime: viewCarInfo.auction_end_datetime,
+      startPrice: auctionInfo.AU_start_price
+    };
+
+    req.session.carInfo = rendObj;
+
+    res.render(`master/cars/edit_input.ejs`, rendObj);
+  })
+
+  .post('/edit_input', (req, res, next)=>{
+    // 確認画面表示
+    const carInfo = req.session.carInfo;
+
+    // 編集内容
+    carInfo.carName = req.body.carName;
+    carInfo.makerSelected = req.body.makerId;
+    carInfo.bodyTypeSelected = req.body.bodyTypeId;
+    carInfo.passengerSelected = req.body.passenger;
+    carInfo.mileage = req.body.mileage;
+    carInfo.colorSelected = req.body.colorId;
+    carInfo.startTime = req.body.startTime
+    carInfo.endTime = req.body.endTime
+    carInfo.startPrice = req.body.startPrice
+
+
+    req.session.carInfo = carInfo;
+    rendObj = carInfo;
+    res.render(`master/cars/edit_confirm.ejs`, rendObj);
+  })
+
+  .post('/edit_confirm', async (req, res, next)=>{
+    // 登録処理
+    const carInfo = req.session.carInfo;
+    await VehicleDao.update(carInfo.carId, carInfo.carName, carInfo.makerSelected, carInfo.colorSelected, carInfo.passengerSelected);
+    await AuctionDao.update(carInfo.carId, carInfo.startTime, carInfo.startPrice, carInfo.endTime);
+    res.redirect(`./car_list`);
+  })
+
+
+  // 登録画面
   .get('/register_input', async (req, res, next) => {
     // メーカー一覧
     const maker = await MakerDao.findAll();
@@ -131,13 +207,13 @@ carsRouter
   })
 
 
-// 更新画面
+  // 更新画面
 
 
-// 削除画面
+  // 削除画面
 
 
-// DEFAULT
+  // DEFAULT
   .get('/*', (req, res, next) => {
     console.log(`該当なし${req.path}`);
     res.render(`master/cars${req.path}.ejs`);

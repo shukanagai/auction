@@ -37,7 +37,7 @@ module.exports = {
     /**
      * データの加工処理&データ返す処理
      */
-    return rows;
+    return rows[0];
   },
 
   /**
@@ -73,7 +73,7 @@ module.exports = {
    */
   update: async function (vehicleId, startDatetime, startPrice, endDatetime) {
     // sql
-    const sql = `UPDATE auctions SET AU_start_datetime = ${startDatetime}, AU_start_price = ${startPrice}, AU_end_datetime = ${endDatetime} WHERE AU_id = ${vehicleId}`;
+    const sql = `UPDATE auctions SET AU_start_datetime = '${startDatetime}', AU_start_price = ${startPrice}, AU_end_datetime = '${endDatetime}' WHERE AU_vehicle_id = ${vehicleId}`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
@@ -85,7 +85,7 @@ module.exports = {
    */
   sold: async function (vehicleId, userId, endPrice) {
     // sql
-    const sql = `UPDATE auctions SET AU_user_id = '${userId}', AU_end_price = '${endPrice} WHERE AU_id = ${vehicleId}`;
+    const sql = `UPDATE auctions SET AU_user_id = '${userId}', AU_end_price = '${endPrice} WHERE AU_vehicle_id = ${vehicleId}`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
