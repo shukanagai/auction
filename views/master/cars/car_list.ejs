@@ -7,6 +7,7 @@
     <title>車両情報一覧 | HAL自動車売買株式会社</title>
 </head>
 <body>
+    <%- include("../header.ejs")%>
     <main class="w-100 my-0 mx-auto d-flex flex-column justify-content-center mt-4">
         <h2 class="mx-auto w-75">車両情報一覧</h2>
         <article>
@@ -19,6 +20,9 @@
             </form>
         </article>
         <article class="mx-auto w-75 mb-5">
+            <div class="text-end mb-4">
+                <a href="/master/cars/register_input" class="btn btn-primary">新規車両追加</a>
+            </div>
             <h3 class="d-none">車両一覧</h3>
             <% for (const car of carList) { %>
                 <div class="card">
@@ -53,4 +57,12 @@
         </article>
     </main>
 </body>
+<script>
+    function deleteCheck(){
+        let yesNo = confirm("削除する？");
+        if(!yesNo){
+            event.preventDefault()
+        }
+    }
+</script>
 </html>
