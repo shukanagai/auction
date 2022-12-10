@@ -24,22 +24,24 @@
                 <a href="/master/cars/register_input" class="btn btn-primary">新規車両追加</a>
             </div>
             <h3 class="d-none">車両一覧</h3>
+            <% for (const car of carList) { %>
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img class="card-img-top" src="" alt="car_icon">
+                            <img class="card-img-top" src="../../img/car_img/<%= car.car_img_path %>" alt="car_icon">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">車名:</h5>
-                                <p class="card-text">開始価格:5000000円</p>
-                                <p class="card-text"><small class="text-muted">開始日時:2022年10月11日13時40分〜</small></p>
-                                <a href="" class="btn btn-primary">編集</a>
-                                <a href="delete?carId=1" class="btn btn-danger ml-1" onclick="deleteCheck(this)">削除</a>
+                                <h5 class="card-title">車名:<%= car.car_name %></h5>
+                                <p class="card-text">開始価格:<%= car.auction_start_price %>円</p>
+                                <p class="card-text"><small class="text-muted">開始日時:<%= car.auction_start_datetime %>〜</small></p>
+                                <a href="edit_input?carId=<%= car.car_id %>" class="btn btn-primary">編集</a>
+                                <a href="delete?carId=<%= car.car_id %>" class="btn btn-danger ml-1">削除</a>
                             </div>
                         </div>
                     </div>
                 </div>
+            <% } %>
         </article>
         <article class="mx-auto">
             <h4 class="d-none">ページャー</h4>

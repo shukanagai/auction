@@ -12,34 +12,42 @@
     <h2>車両変更確認</h2>
     <article>
         <h3 class="d-none">車両変更確認</h3>
-        <form action="register_input" method="post">
+        <form action="edit_confirm" method="post">
             <section class="mb-3 w-100">
-                <p class="mx-auto w-25 h-25"><img class="img-fluid" src="img/demo_img/K0000658496.jpg" alt=""></p>
+                <p class="mx-auto w-25 h-25"><img class="img-fluid" src="../../img/car_img/<%= carImgFileName %>" alt=""></p>
             </section>
 
             <dl class="row mx-auto w-100 mb-5">
                 <dt class="col-2 mx-auto">車種</dt>
-                <dd class="col-10">SKYLINE</dd>
+                <dd class="col-10"><%= carName %></dd>
                 <dt class="col-2">メーカー</dt>
-                <dd class="col-10">NISSAN</dd>
+                <dd class="col-10"><%= makerName %></dd>
                 <dt class="col-2">定員</dt>
-                <dd class="col-10">5人</dd>
-                <dt class="col-2">走行年数</dt>
-                <dd class="col-10">5年</dd>
+                <dd class="col-10"><%= passengerSelected %>人</dd>
                 <dt class="col-2">走行距離</dt>
-                <dd class="col-10">100km</dd>
+                <dd class="col-10"><%= mileage %>km</dd>
                 <dt class="col-2">ベースカラー</dt>
-                <dd class="col-10">青</dd>
+                <dd class="col-10"><%= colorName %></dd>
                 <dt class="col-2">開始日時</dt>
-                <dd class="col-10">2022年10月22日14:30</dd>
+                <dd class="col-10"><%= viewStartTime %></dd>
+                <dt class="col-2">終了日時</dt>
+                <dd class="col-10"><%= viewEndTime %></dd>
                 <dt class="col-2">開始価格</dt>
-                <dd class="col-10">50000000円</dd>
+                <dd class="col-10"><%= startPrice %>円</dd>
             </dl>
-            
             <div class="mx-auto w-100  d-flex justify-content-around">
-                <button class="btn btn-secondary w-25 mb-3" type="button">戻る</button>
-                <button class="btn btn-primary w-25 mb-3" type="button">変更</button>
+                <a class="btn btn-secondary w-25 mb-3" href="edit_input?carId=<%= carId %>" type="button">戻る</a>
+                <button class="btn btn-primary w-25 mb-3" type="submit">変更</button>
             </div>
+
+            <!-- 
+
+                        /////////////
+                        12/09 ここまで完了
+                        ////////////
+
+
+             -->
         </form>
     </article>
 </main>

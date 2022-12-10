@@ -4,6 +4,20 @@ const dbConf = require('../../config').dbConfig;
 
 module.exports = {
   /**
+  * PKから車両の詳細情報を選択
+  */
+  findByPK: async function (id) {
+    // sql
+    const sql = `SELECT * FROM vehicles WHERE V_id = ` + id;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    // データの加工処理&データ返す処理
+    return rows[0];
+  },
+
+  /**
    * 車両の基本情報を新規登録
    */
   insert: async function (name, makerId, mileage, colorId, transmission, bodyTypeId, passenger, handle, imageFileName) {
@@ -29,7 +43,7 @@ module.exports = {
     let sql = `UPDATE vehicles SET V_name = '${name}', V_maker_id = '${makerId}', V_color_system_id = '${colorId}' WHERE V_id = ` + id;
     await connection.query(sql);
     // select実行
-    sql = `UPDATE vehicle_details SET VD_passenger = '${passenger}' WHERE VD_id = ` + id;
+    sql = `UPDATE vehicle_details SET VD_passenger = '${passenger}' WHERE VD_Vehicle_id = ` + id;
     await connection.query(sql);
     await connection.end();
   },
