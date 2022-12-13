@@ -90,5 +90,21 @@ module.exports = {
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
     await connection.end();
+  },
+
+  /**
+   * 現在行われているオークション車両情報
+   */
+  findNowAuction: async function () {
+    // sql
+    const sql = `SELECT * FROM auctions WHERE AU_start_datetime <= now() AND AU_end_datetime > now()`;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    /**
+     * データの加工処理&データ返す処理
+     */
+    return rows[0];
   }
 }

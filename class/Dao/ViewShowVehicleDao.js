@@ -84,6 +84,23 @@ module.exports = {
 
     // データの加工処理&データ返す処理
     return rows;
+  },
+
+  /**
+   * 現在行われているオークション車両情報
+   */
+  findNowAuction: async function () {
+    // sql
+    let strNow = "DATE_FORMAT(now(),'%Y年%m月%d日 %H時%i分%s秒')"
+    const sql = `SELECT * FROM view_show_vehicles WHERE auction_start_datetime <= ${strNow} AND auction_end_datetime > ${strNow}`;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    /**
+     * データの加工処理&データ返す処理
+     */
+    return rows[0];
   }
 
 }
