@@ -85,11 +85,40 @@ module.exports = {
    */
   sold: async function (vehicleId, userId, endPrice) {
     // sql
-    const sql = `UPDATE auctions SET AU_user_id = '${userId}', AU_end_price = '${endPrice} WHERE AU_vehicle_id = ${vehicleId}`;
+    const sql = `UPDATE auctions SET AU_user_id = '${userId}', AU_end_price = '${endPrice}' WHERE AU_vehicle_id = ${vehicleId}`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
     await connection.end();
+  },
+
+  /**
+   * 入札時の価格更新
+   */
+  updatePrice: async function (price, userId, vehicleId) {
+    // sql
+    const sql = `update auctions SET AU_end_price = ${price}, AU_user_id = ${userId} WHERE AU_vehicle_id = ${vehicleId}`;
+
+    const connection = await mysql.createConnection(dbConf);
+    const result = await connection.query(sql);
+    await connection.end();
+
+    return result[0].changedRows;
+  },
+
+  /**
+   * 現在進行中のオークションを参照
+   */
+  findNowAuction: async function () {
+    // sql
+    const sql = `SELECT * FROM auctions WHERE AU_start_datetime < now() AND AU_end_datetime > now()`;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    /**
+     * データの加工処理&データ返す処理
+     */
+    return rows[0];
   }
-  // findNowAuction
 }
