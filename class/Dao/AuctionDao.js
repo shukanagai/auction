@@ -111,7 +111,7 @@ module.exports = {
    */
   findNowAuction: async function () {
     // sql
-    const sql = `SELECT * FROM auctions WHERE AU_start_datetime < now() AND AU_end_datetime > now()`;
+    const sql = `SELECT * FROM auctions WHERE AU_start_datetime <= now() AND AU_end_datetime > now()`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);

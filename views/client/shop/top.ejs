@@ -9,65 +9,52 @@
 <body>
     <main class="w-100 my-0 mx-auto d-flex flex-column justify-content-center mt-4">
         <h2 class="mx-auto w-75 mb-3">車両販売トップ</h2>
+        <% if(nowAuctionCar){ %>
         <article class="mx-auto w-75 mb-5">
             <h3>現在行われている車両</h3>
             <div class="card p-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img class="card-img-top" src="/img/demo_img/K0000658496.jpg" alt="car_icon">
+                        <img class="card-img-top" src="/img/car_img/<%=nowAuctionCar.car_img_path %>" alt="car_icon">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">車名:アルティス</h5>
+                            <h5 class="card-title">車名:<%=nowAuctionCar.car_name %></h5>
                             <p class="card-text">
-                                開始価格:<sapn>100000</sapn>円<br>
-                                現在の価格:<sapn>300000</sapn>円<br>
-                                終了まであと:<sapn>1時間30分</sapn><br>
-                                終了日時:<sapn>2022年4月12日 PM12:00</sapn><br>
+                                開始価格:<sapn><%=nowAuctionCar.auction_start_price %></sapn>円<br>
+                                現在の価格:<sapn><%=nowAuctionCar.auction_end_price %></sapn>円<br>
+                                終了まであと:<sapn><%=nowAuctionEndTime %></sapn><br>
+                                終了日時:<sapn><%=nowAuctionCar.auction_end_datetime %></sapn><br>
                             </p>
-                            <p class="card-text"><small class="text-muted">開始日時:2022年10月11日13時40分〜</small></p>
+                            <p class="card-text"><small class="text-muted">開始日時:<%=nowAuctionCar.auction_start_datetime %></small></p>
                             <a href="../shop/input" class="btn btn-primary">入札画面へ</a>
                         </div>
                     </div>
                 </div>
             </div>
         </article>
+        <% } %>
         <article class="mx-auto w-75 mb-5">
             <h3>今後の予定</h3>
+            <% for (const car of auctionCarList) { %>
             <div class="card mb-3 p-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img class="card-img-top" src="/img/demo_img/K0000658496.jpg" alt="car_icon">
+                        <img class="card-img-top" src="/img/car_img/<%=car.car_img_path %>" alt="car_icon">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">車名:アルティス</h5>
+                            <h5 class="card-title">車名:<%=car.car_name %></h5>
                             <p class="card-text">
-                                開始価格:<sapn>100000</sapn>円<br>
-                                終了日時:<sapn>2022年4月12日 AM12:00</sapn><br>
+                                開始価格:<sapn><%=car.auction_start_price %></sapn>円<br>
+                                終了日時:<sapn><%=car.auction_end_datetime %></sapn><br>
                             </p>
-                            <p class="card-text"><small class="text-muted">開始日時:2022年10月11日13時40分〜</small></p>
+                            <p class="card-text"><small class="text-muted">開始日時:<%=car.auction_start_datetime %>〜</small></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card mb-3 p-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img class="card-img-top" src="/img/demo_img/K0000658496.jpg" alt="car_icon">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">車名:アルティス</h5>
-                            <p class="card-text">
-                                開始価格:<sapn>100000</sapn>円<br>
-                                終了日時:<sapn>2022年4月12日 AM12:00</sapn><br>
-                            </p>
-                            <p class="card-text"><small class="text-muted">開始日時:2022年10月11日13時40分〜</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <% } %>
             <div class="card mb-3 p-3">
                 <div class="row g-0">
                     <div class="col-md-4">

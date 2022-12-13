@@ -25,6 +25,7 @@ const uploads = multer({
 });
 
 let rendObj;
+let result;
 
 carsRouter
   // 車両一覧画面
