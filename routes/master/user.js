@@ -8,6 +8,7 @@ userRouter
   .get('/user_list', async function (req, res, next) {
     let userList;
 
+    // 検索の有無
     if (req.query.userName != undefined) {
       userList = await UserDao.findByName(req.query.userName);
     } else {
@@ -28,34 +29,18 @@ userRouter
     };
     res.render(`master/user${req.path}.ejs`, rendObj);
   })
+
+  // ban画面
   .get('/user_ban', async function (req, res, next) {
-    // const userList = await UserDao.findAll();
-
-    /**
-     * req.query.userId => ユーザーID
-     */
-
-    /**
-     * テンプレート
-     */
-    const user = {
-      US_id: 1,
-      US_name: 'hal',
-      US_login_id: 'hal',
-      US_password: 'hal',
-      US_gender: 'M',
-      US_birthday: '1999-12-11T15:00:00.000Z',
-      US_address: '大阪市',
-      US_mail: 'hal@hal.ac.jp',
-      US_tel: '9099998888',
-      US_ban: 0
-    };
+    let user = await UserDao.findByPK(req.query.userId);
 
     rendObj = {
       user
     }
     res.render(`master/user${req.path}.ejs`, rendObj);
   })
+
+  // ban処理実行
   .get('/exeBan', async function (req, res, next) {
     await UserDao.ban(req.query.userId);
 
