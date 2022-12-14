@@ -13,7 +13,10 @@ shopRouter
     rendObj = await AuctionDao.findAll();
     res.render('client/shop/top.ejs', rendObj);
   })
-
+  .get('/*', (req, res, next)=>{
+    console.log(`該当なし : ${req.path}`);
+    res.render(`client/shop/${req.path}.ejs`);
+  })
 
 
 ;
