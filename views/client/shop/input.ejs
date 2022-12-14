@@ -21,7 +21,7 @@
                             <h5 class="card-title">車名:<%= carName %></h5>
                             <p class="card-text">
                                 開始価格:<sapn><%= startPrice %></sapn>円<br>
-                                現在の価格:<sapn><%= nowPrice%></sapn>円<br>
+                                現在の価格:<sapn><%= nowPrice %></sapn>円<br>
                                 終了まであと:<sapn><%= nowAuctionEndTime %></sapn><br>
                                 終了日時:<sapn><%= endTime %></sapn><br>
                             </p>
@@ -29,7 +29,7 @@
                         <div class="col-6">
                             <form action="">
                                 <div class="rounded bg-primary text-light p-3 mb-3">
-                                    現在の価格：<%= nowPrice%>円
+                                    現在の価格：<%= nowPrice %>円
                                 </div>
                                 <label for="formName" class="form-label">追加金額</label>
                                 <div class="input-group mb-3">
@@ -51,7 +51,7 @@
         </article>
     </main>
     <script>
-        const userId = <%=  %>;
+        const userId = <%= intUserId %>;
         const basePrice = 20000;
         let nowPrice = basePrice;
         const price = document.getElementById("price");
@@ -66,7 +66,6 @@
                 price.value = nowPrice;
             }
         }
-        
     </script>
 </body>
 </html>
