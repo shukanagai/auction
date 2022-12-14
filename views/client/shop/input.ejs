@@ -14,7 +14,7 @@
                 <div class="card-header">新規案件登録</div>
                 <div class="card-body p-5">
                     <div class="d-flex justify-content-center w-100">
-                        <img class="card-img-top w-75" src="./img/demo_img/K0000658496.jpg" alt="car_icon">
+                        <img class="card-img-top w-75" src="/img/demo_img/K0000658496.jpg" alt="car_icon">
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -32,10 +32,13 @@
                                     現在の価格：21,000円
                                 </div>
                                 <label for="formName" class="form-label">追加金額</label>
-                                <input class="form-control mb-3" type="text" value="20000円" disabled>
+                                <div class="input-group mb-3">
+                                    <input id="price" class="form-control" type="text" value="20000" disabled>
+                                    <span class="input-group-text">円</span>
+                                </div>
                                 <div class="mb-4">
-                                    <button class="btn btn-success">+10,000円</button>
-                                    <button class="btn btn-success">-10,000円</button>
+                                    <button type="button" class="btn btn-success" onclick="countUp()">+10,000円</button>
+                                    <button type="button" class="btn btn-success" onclick="countDown()">-10,000円</button>
                                 </div>
                                 <div>
                                     <button class="btn btn-primary">決定する</button>
@@ -47,5 +50,22 @@
             </div>
         </article>
     </main>
+    <script>
+        const basePrice = 20000;
+        let nowPrice = basePrice;
+        const price = document.getElementById("price");
+
+        function countUp(){
+            nowPrice += 10000;
+            price.value = nowPrice;
+        }
+        function countDown(){
+            if(!(nowPrice <= basePrice)){
+                nowPrice -= 10000;
+                price.value = nowPrice;
+            }
+        }
+        
+    </script>
 </body>
 </html>

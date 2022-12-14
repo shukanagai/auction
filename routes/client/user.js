@@ -36,6 +36,10 @@ userRouter
     // レンダリング
     res.render('../../history.ejs', rendObj);
   })
+  .get('/*', (req, res, next)=>{
+    console.log(`該当なし : ${req.path}`);
+    res.render(`client/user/${req.path}.ejs`);
+  })
 ;
 
 module.exports = userRouter;
