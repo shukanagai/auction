@@ -61,7 +61,8 @@ module.exports = {
    */
   insert: async function (vehicleId, startDatetime, startPrice, endDatetime) {
     // sql
-    const sql = `INSERT INTO auctions (AU_vehicle_id, AU_user_id, AU_start_datetime, AU_start_price, AU_end_datetime, AU_end_price) VALUES(${vehicleId}, ${ADMIN_USER_ID}, '${startDatetime}', ${startPrice}, '${endDatetime}', -1)`;
+    // 12/14 AU_end_priceについて、オークション実動作部に-1だと諸々の問題がある為、デフォルト値をstartPriceに変更
+    const sql = `INSERT INTO auctions (AU_vehicle_id, AU_user_id, AU_start_datetime, AU_start_price, AU_end_datetime, AU_end_price) VALUES(${vehicleId}, ${ADMIN_USER_ID}, '${startDatetime}', ${startPrice}, '${endDatetime}', ${startPrice})`;
     // insert実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);

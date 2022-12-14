@@ -48,13 +48,16 @@ shopRouter
     // let sec = Math.floor(ms / 1000 % 60); //秒
     result2 = hour + "時間" + min + "分";
 
+    const [user] = await UserDao.findByLoginId(req.session.loginId);
+
     rendObj = {
       carName: au.car_name,
       carImgPath: au.car_img_path,
       startPrice: au.auction_start_price,
       nowPrice: au.auction_end_price,
       nowAuctionEndTime: result2,
-      endTime: au.auction_end_datetime
+      endTime: au.auction_end_datetime,
+      intUserId: user.US_id
     }
 
     res.render('client/shop/input.ejs', rendObj);
