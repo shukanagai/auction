@@ -52,15 +52,9 @@ module.exports = {
   /**
    * 検索条件から車両の詳細情報を選択
    */
-  findByName: async function (name, maker, color, transmission, bodyType, passenger) {
+  findByName: async function (name) {
     // sql
-    const sql = `SELECT * FROM view_manage_vehicles`;
-    sql += ` WHERE car_name LIKE '%${name}%'`;
-    if (maker != null) sql += ` AND car_maker = ${maker}`;
-    if (color != null) sql += ` AND car_color = ${color}`;
-    if (transmission != null) sql += ` AND car_transmission = ${transmission}`;
-    if (bodyType != null) sql += ` AND car_body_type = ${bodyType}`;
-    if (passenger != null) sql += ` AND car_passenger = ${passenger}`;
+    const sql = `SELECT * FROM view_manage_vehicles WHERE car_name LIKE '%${name}%'`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -68,6 +62,40 @@ module.exports = {
     // データの加工処理&データ返す処理
     return rows;
   },
+
+  /**
+   * 検索条件から車両の詳細情報を選択
+   */
+  findByNamePerPage: async function (pageNum, name) {
+    // sql
+    const sql = `SELECT * FROM view_manage_vehicles WHERE car_name LIKE '%${name}%' LIMIT ${pageNum-1},10`;
+    // select実行
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
+    // データの加工処理&データ返す処理
+    return rows;
+  },
+
+  /**
+   * 検索条件から車両の詳細情報を選択
+   */
+  // findByAll: async function (name, maker, color, transmission, bodyType, passenger) {
+  //   // sql
+  //   const sql = `SELECT * FROM view_manage_vehicles`;
+  //   sql += ` WHERE car_name LIKE '%${name}%'`;
+  //   if (maker != null) sql += ` AND car_maker = ${maker}`;
+  //   if (color != null) sql += ` AND car_color = ${color}`;
+  //   if (transmission != null) sql += ` AND car_transmission = ${transmission}`;
+  //   if (bodyType != null) sql += ` AND car_body_type = ${bodyType}`;
+  //   if (passenger != null) sql += ` AND car_passenger = ${passenger}`;
+  //   // select実行
+  //   const connection = await mysql.createConnection(dbConf);
+  //   const [rows, fields] = await connection.execute(sql);
+  //   await connection.end();
+  //   // データの加工処理&データ返す処理
+  //   return rows;
+  // },
 
   /**
    * 車両一覧画面に必要なデータ(10件毎に取得)
