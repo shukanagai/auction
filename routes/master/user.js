@@ -7,10 +7,12 @@ let rendObj;
 userRouter
   .get('/user_list', async function (req, res, next) {
     let userList;
+    let nameValue = "";
 
     // 検索の有無
     if (req.query.userName != undefined) {
       userList = await UserDao.findByName(req.query.userName);
+      nameValue = req.query.userName;
     } else {
       userList = await UserDao.findAll();
     }
