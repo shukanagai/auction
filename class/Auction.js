@@ -36,7 +36,6 @@ module.exports = class Auction {
        * updatePrice
        */
       socket.on('updatePrice', async (data) => {
-        console.log(data);
         // 更新判定
         if (data.price && this._nowPrice < data.price) {
           // DB価格更新処理(戻り値は更新レコード数)
@@ -46,10 +45,10 @@ module.exports = class Auction {
             this.io.emit('updatePrice', { price: data.price });
             this._nowPrice = data.price;
           } else {
-            this.io.emit('updatePriceFail', { errorMsg: '価格の更新に失敗しました。' });
+            this.io.to(socket.id).emit('updatePriceFail', { errorMsg: '価格の更新に失敗しました。' });
           }
         } else {
-          this.io.emit('updatePriceFail', { errorMsg: '更新に失敗しました。' });
+          this.io.to(socket.id).emit('updatePriceFail', { errorMsg: '更新に失敗しました。' });
         }
       });
 

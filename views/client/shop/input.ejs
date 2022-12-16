@@ -13,27 +13,26 @@
             <div class="card">
                 <div class="card-header">新規案件登録</div>
                 <div class="card-body p-5">
-                    <div class="d-flex justify-content-center w-100">
+                    <div class="d-flex justify-content-center w-100 mt-3">
                         <img class="card-img-top w-75" src="../../img/car_img/<%= carImgPath %>" alt="car_icon">
                     </div>
-                    <div class="row">
+                    <div class="row mt-5">
                         <div class="col-6">
                             <h5 class="card-title">車名:<%= carName %></h5>
                             <p class="card-text">
                                 開始価格:<sapn><%= startPrice %></sapn>円<br>
-                                現在の価格:<sapn><%= nowPrice %></sapn>円<br>
                                 終了まであと:<sapn><%= nowAuctionEndTime %></sapn><br>
                                 終了日時:<sapn><%= endTime %></sapn><br>
                             </p>
                         </div>
                         <div class="col-6">
                             <form action="">
-                                <div class="rounded bg-primary text-light p-3 mb-3">
+                                <div class="rounded bg-primary text-light p-3 mb-3" id="nowPriceDisplay">
                                     現在の価格：<%= nowPrice %>円
                                 </div>
                                 <label for="formName" class="form-label">追加金額</label>
                                 <div class="input-group mb-3">
-                                    <input id="price" class="form-control" type="text" value="20000" disabled>
+                                    <input id="price" class="form-control" type="text" value="<%= nowPrice %>" disabled>
                                     <span class="input-group-text">円</span>
                                 </div>
                                 <div class="mb-4">
@@ -54,9 +53,10 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const userId = <%= intUserId %>;
-        const basePrice = 20000;
+        let basePrice = <%= nowPrice %>;
         let nowPrice = basePrice;
         const price = document.getElementById("price");
+        const nowPriceDisplay = document.getElementById("nowPriceDisplay");
 
         function countUp(){
             nowPrice += 10000;
@@ -72,7 +72,24 @@
 
         const submitButton = document.getElementById("submit");
         submitButton.addEventListener("click",function(){
-            socket.emit("updatePrice", {"price":100000,"userId":userId});
+            socket.emit("updatePrice", {"price":price.value,"userId":userId});
+        });
+
+        socket.on("updatePrice",function(data){
+            basePrice = data.price;
+            price.value = data.price;
+            nowPriceDisplay.textContent = `現在の価格：${data.price}円`
+            alert("価格を更新しました");
+        })
+
+        socket.on("updatePriceFail",function(data){
+            alert(data.errorMsg);
+        })
+
+        window.location.href('/client/shop/top');
+
+        socket.on('timeOver',function(){
+            window.location.href('/client/shop/top');
         });
     </script>
 </body>
