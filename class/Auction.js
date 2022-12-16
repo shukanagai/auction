@@ -37,12 +37,13 @@ module.exports = class Auction {
        */
       socket.on('updatePrice', async (data) => {
         // 更新判定
-        if (data.price && this._startPrice < data.price) {
+        if (data.price && this._nowPrice < data.price) {
           // DB価格更新処理(戻り値は更新レコード数)
           const result = await AuctionDao.updatePrice(data.price, data.userId, this._vehicleId);
 
           if (result == 1) {
             this.io.emit('updatePrice', { price: data.price });
+            this._nowPrice = data.price;
           } else {
             this.io.emit('updatePriceFail', { errorMsg: '価格の更新に失敗しました。' });
           }
