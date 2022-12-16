@@ -38,21 +38,18 @@ module.exports = class Auction {
       socket.on('updatePrice', async (data) => {
         console.log(data);
         // 更新判定
-        if (data.price && this._endPrice < data.price) {
+        if (data.price && this._nowPrice < data.price) {
           // DB価格更新処理(戻り値は更新レコード数)
           const result = await AuctionDao.updatePrice(data.price, data.userId, this._vehicleId);
 
           if (result == 1) {
             this.io.emit('updatePrice', { price: data.price });
-            // フィールド更新して！！！！！堀内
-            console.log("成功");
+            this._nowPrice = data.price;
           } else {
             this.io.emit('updatePriceFail', { errorMsg: '価格の更新に失敗しました。' });
-            console.log("失敗1");
           }
         } else {
           this.io.emit('updatePriceFail', { errorMsg: '更新に失敗しました。' });
-          console.log("失敗2");
         }
       });
 
