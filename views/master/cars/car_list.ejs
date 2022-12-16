@@ -46,13 +46,11 @@
         <article class="mx-auto">
             <h4 class="d-none">ページャー</h4>
             <ul class="pagination">
-                <li class="page-item"><a href="" class="page-link">前へ</a></li>
-                <li class="page-item"><a href="" class="page-link">1</a></li>
-                <li class="page-item"><a href="" class="page-link">2</a></li>
-                <li class="page-item"><a href="" class="page-link">3</a></li>
-                <li class="page-item"><a href="" class="page-link">4</a></li>
-                <li class="page-item"><a href="" class="page-link">5</a></li>
-                <li class="page-item"><a href="" class="page-link">次へ</a></li>
+                <li class="page-item <%= currentPage == 1 ? 'disabled' : '' %>"><a href="?page=<%= currentPage - 1 %>" class="page-link">前へ</a></li>
+                <% for (let i=0; i < pageLength; i++) { %>
+                <li class="page-item"><a href="?page=<%= i + 1 %>" class="page-link"><%= i + 1 %></a></li>
+                <% } %>
+                <li class="page-item <%= currentPage == pageLength ? 'disabled' : '' %>"><a href="?page=<%= currentPage + 1 %>" class="page-link">次へ</a></li>
             </ul>
         </article>
     </main>

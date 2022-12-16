@@ -119,7 +119,7 @@ module.exports = {
    */
   countPageNum: async function () {
     // sql
-    const sql = `SELECT COUNT(*) FROM view_manage_vehicles`;
+    const sql = `SELECT COUNT(*) AS count FROM view_manage_vehicles`;
 
     // select実行
     const connection = await mysql.createConnection(dbConf);
@@ -127,7 +127,8 @@ module.exports = {
     await connection.end();
 
     // データの加工処理&データ返す処理
-    return rows;
+    let result = Math.floor(rows[0].count / 10) + 1
+    return result;
   }
 
 }
