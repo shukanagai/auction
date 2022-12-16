@@ -33,8 +33,9 @@ userRouter
   .get('/history', async (req, res, next) => {
     // 競り落とし履歴
     rendObj = await AuctionDao.findByUserID(req.query.userId);
+    console.log(rendObj);
     // レンダリング
-    res.render('../../history.ejs', rendObj);
+    res.render('client/user/history.ejs', rendObj);
   })
   .get('/*', (req, res, next)=>{
     console.log(`該当なし : ${req.path}`);
