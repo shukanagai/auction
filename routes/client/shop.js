@@ -1,7 +1,7 @@
 var express = require('express');
 
 const shopRouter = express.Router({ mergeParams: true });
-
+const fs = require('fs');
 const UserDao = require('../../class/Dao/UserDao');
 const AuctionDao = require('../../class/Dao/AuctionDao');
 const ViewShowVehicleDao = require('../../class/Dao/ViewShowVehicleDao');
@@ -27,6 +27,17 @@ shopRouter
     // 今後のオークション車両リスト
     let list = await ViewShowVehicleDao.findAll();
 
+    // 画像ファイルチェック(存在しないならno_img.pngに変更)
+    if (!fs.existsSync(`public/img/car_img/${result1.car_img_path}`)) {
+      car.car_img_path = 'no_img.png';
+    }
+    for (const car of list) {
+      if (!fs.existsSync(`public/img/car_img/${car.car_img_path}`)) {
+        car.car_img_path = 'no_img.png';
+      }
+    }
+
+
     rendObj = {
       nowAuctionCar: result1,
       nowAuctionEndTime: result2,
@@ -49,6 +60,12 @@ shopRouter
     result2 = hour + "時間" + min + "分";
 
     const [user] = await UserDao.findByLoginId(req.session.loginId);
+
+    // 画像ファイルチェック(存在しないならno_img.pngに変更)
+    if (!fs.existsSync(`public/img/car_img/${au.car_img_path}`)) {
+      car.car_img_path = 'no_img.png';
+    }
+
 
     rendObj = {
       carName: au.car_name,

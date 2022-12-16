@@ -5,16 +5,22 @@ const userRouter = require('./client/user');
 const shopRouter = require('./client/shop');
 
 clientRouter
-// マイページ
+  .use((req, res, next) => {
+    if (req.session.isAdmin) {
+      res.redirect('../login');
+    }
+    next();
+  })
+  // マイページ
   .use('/user', userRouter)
-// オークション
+  // オークション
   .use('/shop', shopRouter)
 
-// デフォルトレンダリング
+  // デフォルトレンダリング
   .get('/*', function (req, res, next) {
     console.log(`該当なし : ${req.path}`);
     res.render(`master${req.path}.ejs`);
   })
-;
+  ;
 
 module.exports = clientRouter;

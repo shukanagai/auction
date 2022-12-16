@@ -79,7 +79,7 @@ module.exports = {
    */
   update: async function (id, name, loginId, password, gender, birthday, address, mail, tel) {
     // sql
-    const sql = `UPDATE users SET US_name = '${name}', US_login_id = '${loginId}', US_password = '${password}', US_gender = '${gender}', US_birthday = ${birthday}, US_address = '${address}', US_mail = '${mail}', US_tel = '${tel}' WHERE US_id = ` + id;
+    const sql = `UPDATE users SET US_name = '${name}', US_login_id = '${loginId}', US_password = '${password}', US_gender = '${gender}', US_birthday = '${birthday}', US_address = '${address}', US_mail = '${mail}', US_tel = '${tel}' WHERE US_login_id = '` + id + `'`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);
@@ -103,7 +103,7 @@ module.exports = {
    */
   withdrawal: async function (id) {
     // sql
-    const sql = `UPDATE users SET US_state = 2 WHERE US_id = ` + id;
+    const sql = `UPDATE users SET US_state = 1 WHERE US_id = ` + id;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     await connection.query(sql);

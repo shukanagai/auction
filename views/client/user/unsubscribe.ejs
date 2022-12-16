@@ -17,21 +17,21 @@
                 <table class="table table-borderless mt-3">
                     <tr>
                         <th scope="row">氏名</th>
-                        <td>永峰弘万</td>
+                        <td><%= userName %></td>
                     </tr>
                     <tr>
                         <th scope="row">住所</th>
-                        <td>大阪府大阪市北区梅田３丁目３−１</td>
+                        <td><%= address %></td>
                     </tr>
                     <tr>
                         <th scope="row">メールアドレス</th>
-                        <td>izawasouma@gmail.com</td>
+                        <td><%= mail %></td>
                     </tr>
                 </table>
             </section>
 
             <section class=" w-50 d-flex flex-column mx-auto">
-                <a href="/withdrawal?userId=<%=user.US_id %>" class="btn btn-danger text-light w-75 mb-4 mx-auto">退会する</a>
+                <a href="../user//unsubscribe/withdrawal?userId=<%= userId %>" class="btn btn-danger text-light w-75 mb-4 mx-auto">退会する</a>
                 <a href="../user/mypage_top" class="btn btn-secondary text-light w-75 mb-4 mx-auto">戻る</a>
             </section>
         </article>
