@@ -8,6 +8,7 @@ const VehicleDao = require('../../class/Dao/VehicleDao');
 const ViewManageVehicleDao = require('../../class/Dao/ViewManageVehicleDao');
 const ColorSystemDao = require('../../class/Dao/ColorSystemDao');
 const BodyTypeDao = require('../../class/Dao/BodyTypeDao');
+const { NOMEM } = require('dns');
 
 const carsRouter = express.Router({ mergeParams: true });
 
@@ -25,29 +26,37 @@ const uploads = multer({
 });
 
 let rendObj;
+let pageLength;
 let result;
+let nameValue = "";
 
 carsRouter
   // 車両一覧画面
   .get('/car_list', async (req, res, next) => {
     // ページネーション
     const page = Number(req.query.page) || 1;
+    pageLength = await ViewManageVehicleDao.countPageNum();
 
     // 検索の有無
     if (req.query.carName != undefined) {
       result = await ViewManageVehicleDao.findByNamePerPage(page, req.query.carName);
+      nameValue = req.query.carName;
     } else {
       result = await ViewManageVehicleDao.findAllPerPage(page);
     }
 
-    // 画像ファイルチェック(存在しないならno_img.png表示)
+    // 画像ファイルチェック(存在しないならno_img.pngに変更)
     for (const car of result) {
       if (!fs.existsSync(`public/img/car_img/${car.car_img_path}`)) {
         car.car_img_path = 'no_img.png';
       }
     }
+
     rendObj = {
-      carList: result
+      currentPage: page,
+      pageLength: pageLength,
+      carList: result,
+      nameValue: nameValue
     }
     res.render('master/cars/car_list.ejs', rendObj);
   })
