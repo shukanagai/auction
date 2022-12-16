@@ -4,6 +4,7 @@ const userRouter = express.Router({ mergeParams: true });
 
 const UserDao = require('../../class/Dao/UserDao');
 const AuctionDao = require('../../class/Dao/AuctionDao');
+const ViewManageSaleDao = require('../../class/Dao/ViewManageSaleDao');
 
 let rendObj;
 
@@ -32,15 +33,15 @@ userRouter
   // 競り落とし車両画面レンダリング
   .get('/history', async (req, res, next) => {
     // 競り落とし履歴
-    rendObj = await AuctionDao.findByUserID(req.query.userId);
+    rendObj = await ViewManageSaleDao.findHistoryByUserID(req.session.loginId);
     console.log(rendObj);
     // レンダリング
-    res.render('client/user/history.ejs', rendObj);
+    res.render('client/user/history.ejs', { history: rendObj });
   })
-  .get('/*', (req, res, next)=>{
+  .get('/*', (req, res, next) => {
     console.log(`該当なし : ${req.path}`);
     res.render(`client/user/${req.path}.ejs`);
   })
-;
+  ;
 
 module.exports = userRouter;

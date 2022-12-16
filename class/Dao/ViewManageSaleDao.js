@@ -43,9 +43,9 @@ module.exports = {
   findPricePerMonth: async function (year, month) {
     let nextMonth = month + 1;
     let nextYear = year;
-    if(nextMonth == 13) nextYear ++;
+    if (nextMonth == 13) nextYear++;
     // sql
-    const sql = `SELECT SUM(end_price) FROM view_manage_sales WHERE ` + year+month + `01 <= end_datetime AND end_datetime <` + nextYear+nextMonth + `01`;
+    const sql = `SELECT SUM(end_price) FROM view_manage_sales WHERE ` + year + month + `01 <= end_datetime AND end_datetime <` + nextYear + nextMonth + `01`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -53,6 +53,17 @@ module.exports = {
     /**
      * データの加工処理&データ返す処理
      */
+    return rows;
+  },
+
+  /**
+ * 競り落とした車両をユーザー毎に参照
+ */
+  findHistoryByUserID: async function (userName) {
+    const sql = `SELECT * FROM view_manage_sales WHERE user_name = '${userName}'`;
+    const connection = await mysql.createConnection(dbConf);
+    const [rows, fields] = await connection.execute(sql);
+    await connection.end();
     return rows;
   }
 }

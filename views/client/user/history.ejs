@@ -13,35 +13,22 @@
         <h2>競り落とし車両一覧</h2>
         <article class="mx-auto w-75 mb-5">
             <h3 class="d-none">車両一覧</h3>
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img class="card-img-top" src="/img/demo_img/K0000658496.jpg" alt="car_icon">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">車名: アルティス</h5>
-                            <p class="card-text">開始価格: 5000000円</p>
-                            <p class="card-text">日時: 2022-11-10-12:30</p>
+            <% for (const car of history) { %>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img class="card-img-top" src="../../img/car_img/<%= car.car_img_path %>" alt="car_icon">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">車名: <%= car.car_name %></h5>
+                                <p class="card-text">競り落とし価格: <%= car.end_price %>円</p>
+                                <p class="card-text">終了日時: <%= car.end_datetime %></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img class="card-img-top" src="/img/demo_img/K0000658496.jpg" alt="car_icon">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">車名: アルティス</h5>
-                            <p class="card-text">開始価格: 5000000円</p>
-                            <p class="card-text">日時: 2022-12-13-14:45</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <% } %>
         </article>
 
         <div class=" w-100 d-flex justify-content-center">
