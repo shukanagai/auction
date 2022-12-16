@@ -11,7 +11,7 @@ module.exports = {
    */
   findAll: async function () {
     // sql
-    const sql = `SELECT * FROM users`;
+    const sql = `SELECT * FROM users WHERE US_id <> 2`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -31,7 +31,7 @@ module.exports = {
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
     // データの加工処理&データ返す処理
-    return rows;
+    return rows[0];
   },
 
   /**

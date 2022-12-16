@@ -14,22 +14,22 @@
                 <div class="card-header">新規案件登録</div>
                 <div class="card-body p-5">
                     <div class="d-flex justify-content-center w-100">
-                        <img class="card-img-top w-75" src="/img/demo_img/K0000658496.jpg" alt="car_icon">
+                        <img class="card-img-top w-75" src="../../img/car_img/<%= carImgPath %>" alt="car_icon">
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title">車名:アルティス</h5>
+                            <h5 class="card-title">車名:<%= carName %></h5>
                             <p class="card-text">
-                                開始価格:<sapn>100000</sapn>円<br>
-                                現在の価格:<sapn>300000</sapn>円<br>
-                                終了まであと:<sapn>1時間30分</sapn><br>
-                                終了日時:<sapn>2022年4月12日 PM12:00</sapn><br>
+                                開始価格:<sapn><%= startPrice %></sapn>円<br>
+                                現在の価格:<sapn><%= nowPrice %></sapn>円<br>
+                                終了まであと:<sapn><%= nowAuctionEndTime %></sapn><br>
+                                終了日時:<sapn><%= endTime %></sapn><br>
                             </p>
                         </div>
                         <div class="col-6">
                             <form action="">
                                 <div class="rounded bg-primary text-light p-3 mb-3">
-                                    現在の価格：21,000円
+                                    現在の価格：<%= nowPrice %>円
                                 </div>
                                 <label for="formName" class="form-label">追加金額</label>
                                 <div class="input-group mb-3">
@@ -53,7 +53,7 @@
     <!-- socket.io CDN -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        const userId = 2;
+        const userId = <%= intUserId %>;
         const basePrice = 20000;
         let nowPrice = basePrice;
         const price = document.getElementById("price");

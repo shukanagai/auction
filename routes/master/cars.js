@@ -32,7 +32,14 @@ carsRouter
   .get('/car_list', async (req, res, next) => {
     // ページネーション
     const page = Number(req.query.page) || 1;
-    result = await ViewManageVehicleDao.findAllPerPage(page);
+
+    // 検索の有無
+    if (req.query.carName != undefined) {
+      result = await ViewManageVehicleDao.findByNamePerPage(page, req.query.carName);
+    } else {
+      result = await ViewManageVehicleDao.findAllPerPage(page);
+    }
+
     // 画像ファイルチェック(存在しないならno_img.png表示)
     for (const car of result) {
       if (!fs.existsSync(`public/img/car_img/${car.car_img_path}`)) {
