@@ -41,7 +41,7 @@
                                     <button type="button" class="btn btn-success" onclick="countDown()">-10,000円</button>
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary">決定する</button>
+                                    <button class="btn btn-primary" id="submit" type="button">決定する</button>
                                 </div>
                             </form>
                         </div>
@@ -50,7 +50,10 @@
             </div>
         </article>
     </main>
+    <!-- socket.io CDN -->
+    <script src="/socket.io/socket.io.js"></script>
     <script>
+        const userId = 2;
         const basePrice = 20000;
         let nowPrice = basePrice;
         const price = document.getElementById("price");
@@ -65,7 +68,12 @@
                 price.value = nowPrice;
             }
         }
-        
+        var socket = io();
+
+        const submitButton = document.getElementById("submit");
+        submitButton.addEventListener("click",function(){
+            socket.emit("updatePrice", {"price":100000,"userId":userId});
+        });
     </script>
 </body>
 </html>
