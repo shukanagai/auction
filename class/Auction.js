@@ -36,6 +36,7 @@ module.exports = class Auction {
        * updatePrice
        */
       socket.on('updatePrice', async (data) => {
+        console.log(data);
         // 更新判定
         if (data.price && this._nowPrice < data.price) {
           // DB価格更新処理(戻り値は更新レコード数)
