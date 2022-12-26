@@ -28,7 +28,7 @@ shopRouter
     let list = await ViewShowVehicleDao.findAll();
 
     // 画像ファイルチェック(存在しないならno_img.pngに変更)
-    if (!fs.existsSync(`public/img/car_img/${result1.car_img_path}`)) {
+    if (result1 && !fs.existsSync(`public/img/car_img/${result1.car_img_path}`)) {
       car.car_img_path = 'no_img.png';
     }
     for (const car of list) {
