@@ -95,8 +95,11 @@ module.exports = class Auction {
         this._nowPrice = null;
         clearInterval(timer);
       } else {
+        const remainSec = Math.floor((endTime.getTime() - now.getTime()) / 1000);
+        const min = Math.floor(remainSec / 60);
+        const sec = remainSec % 60;
         diff = endTime - now;
-        this.io.emit('timer', { diff: diff });
+        this.io.emit('timer', { remain:`${min}分${sec}秒` });
       }
     }, 1000);
   }
