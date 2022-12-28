@@ -22,7 +22,7 @@
                             <h5 class="card-title">車名:<%= carName %></h5>
                             <p class="card-text">
                                 開始価格:<sapn><%= startPrice %></sapn>円<br>
-                                終了まであと:<sapn><%= nowAuctionEndTime %></sapn><br>
+                                終了まであと:<sapn id="remain"></sapn><br>
                                 終了日時:<sapn><%= endTime %></sapn><br>
                             </p>
                         </div>
@@ -87,10 +87,13 @@
             alert(data.errorMsg);
         })
 
-        window.location.href('/client/shop/top');
-
         socket.on('timeOver',function(){
-            window.location.href('/client/shop/top');
+            alert("こちらのオークションは終了しました。");
+            window.location.href = '/client/shop/top';
+        });
+
+        socket.on("timer",function(data){
+            document.querySelector("#remain").textContent = data.remain
         });
     </script>
 </body>
