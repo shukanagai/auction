@@ -57,10 +57,10 @@ module.exports = {
   },
 
   /**
- * 競り落とした車両をユーザー毎に参照
- */
-  findHistoryByUserID: async function (userName) {
-    const sql = `SELECT * FROM view_manage_sales WHERE user_name = '${userName}'`;
+  * 競り落とした車両をユーザーidで参照
+  */
+  findHistoryByUserID: async function (userLoginId) {
+    const sql = `SELECT * FROM view_manage_sales WHERE user_login_id = '${userLoginId}'`;
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
     await connection.end();
