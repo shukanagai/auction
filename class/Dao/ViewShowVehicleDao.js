@@ -59,7 +59,7 @@ module.exports = {
    */
   findAllPerPage: async function (pageNum) {
     // sql
-    const sql = `SELECT * FROM view_show_vehicles LIMIT ${pageNum-1},10`;
+    const sql = `SELECT * FROM view_show_vehicles LIMIT ${(pageNum-1) * 10},10`;
 
     // select実行
     const connection = await mysql.createConnection(dbConf);
