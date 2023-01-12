@@ -5,6 +5,7 @@ const userRouter = express.Router({ mergeParams: true });
 const UserDao = require('../../class/Dao/UserDao');
 const AuctionDao = require('../../class/Dao/AuctionDao');
 const ViewManageSaleDao = require('../../class/Dao/ViewManageSaleDao');
+const fs = require('fs');
 
 let rendObj;
 
@@ -40,11 +41,20 @@ userRouter
   // 競り落とし車両画面レンダリング
   .get('/history', async (req, res, next) => {
     // 競り落とし履歴
-    const [user] = await UserDao.findByLoginId(req.session.loginId);
-    rendObj = await ViewManageSaleDao.findHistoryByUserID(user.US_name);
+    console.log(req.session.loginId);
+    rendObj = await ViewManageSaleDao.findHistoryByUserID(req.session.loginId);
+
+    // 画像ファイルチェック(存在しないならno_img.pngに変更)
+    for (const car of rendObj) {
+      if (!fs.existsSync(`public/img/car_img/${car.car_img_path}`)) {
+        car.car_img_path = 'no_img.png';
+      }
+    }
+
     // レンダリング
     res.render('client/user/history.ejs', { history: rendObj });
   })
+
   // マイページ
   .get('/mypage_top', async (req, res, next) => {
     const [user] = await UserDao.findByLoginId(req.session.loginId);

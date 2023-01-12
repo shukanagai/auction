@@ -31,7 +31,7 @@
                                 <div class="rounded bg-primary text-light p-3 mb-3" id="nowPriceDisplay">
                                     現在の価格：<%= nowPrice %>円
                                 </div>
-                                <label for="formName" class="form-label">追加金額</label>
+                                <label for="formName" class="form-label">入札金額</label>
                                 <div class="input-group mb-3">
                                     <input id="price" class="form-control" type="text" value="<%= nowPrice %>" disabled>
                                     <span class="input-group-text">円</span>
@@ -88,9 +88,15 @@
             alert(data.errorMsg);
         })
 
-        socket.on('timeOver',function(){
+        socket.on('timeOver',function(data){
             alert("こちらのオークションは終了しました。");
-            window.location.href = '/client/shop/top';
+            if(data.winnerUserId == userId){
+                alert("おめでとうございます！！オークションに勝利しました。");
+                window.location.href = '/client/user/history';
+            }else{
+                alert("残念ながら、オークションに敗北しました。");
+                window.location.href = '/client/shop/top';
+            }
         });
 
         socket.on("timer",function(data){

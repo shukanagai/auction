@@ -29,7 +29,7 @@ shopRouter
 
     // 画像ファイルチェック(存在しないならno_img.pngに変更)
     if (result1 && !fs.existsSync(`public/img/car_img/${result1.car_img_path}`)) {
-      car.car_img_path = 'no_img.png';
+      result1.car_img_path = 'no_img.png';
     }
     for (const car of list) {
       if (!fs.existsSync(`public/img/car_img/${car.car_img_path}`)) {
@@ -63,7 +63,7 @@ shopRouter
 
     // 画像ファイルチェック(存在しないならno_img.pngに変更)
     if (!fs.existsSync(`public/img/car_img/${au.car_img_path}`)) {
-      car.car_img_path = 'no_img.png';
+      au.car_img_path = 'no_img.png';
     }
 
 
