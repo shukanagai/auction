@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 
 const multer = require('multer');
 const path = require('path');
@@ -32,6 +33,13 @@ salesRouter.get('/sales', async (req, res, next) => {
     currentPage: page,
     sum: sum,
   };
+
+  // 画像ファイルチェック(存在しないならno_img.pngに変更)
+  for (const salesInfo of rendObj.salesInfos) {
+    if (!fs.existsSync(`public/img/car_img/${salesInfo.car_img_path}`)) {
+      salesInfo.car_img_path = 'no_img.png';
+    }
+  }
   
   res.render(`master/sales/sales.ejs`, rendObj);
 })
