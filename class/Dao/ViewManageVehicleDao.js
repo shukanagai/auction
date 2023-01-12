@@ -68,7 +68,7 @@ module.exports = {
    */
   findByNamePerPage: async function (pageNum, name) {
     // sql
-    const sql = `SELECT * FROM view_manage_vehicles WHERE car_name LIKE '%${name}%' LIMIT ${pageNum-1},10`;
+    const sql = `SELECT * FROM view_manage_vehicles WHERE car_name LIKE '%${name}%' ORDER BY car_id DESC LIMIT ${(pageNum-1) * 10},10`;
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -103,7 +103,7 @@ module.exports = {
    */
   findAllPerPage: async function (pageNum) {
     // sql
-    const sql = `SELECT * FROM view_manage_vehicles LIMIT ${pageNum-1},10`;
+    const sql = `SELECT * FROM view_manage_vehicles ORDER BY car_id DESC LIMIT ${(pageNum-1) * 10},10`;
 
     // select実行
     const connection = await mysql.createConnection(dbConf);
