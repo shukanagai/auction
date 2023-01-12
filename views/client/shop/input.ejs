@@ -77,7 +77,8 @@
         });
 
         socket.on("updatePrice",function(data){
-            basePrice = data.price;
+            basePrice = Number(data.price);
+            nowPrice = Number(data.price);
             price.value = data.price;
             nowPriceDisplay.textContent = `現在の価格：${data.price}円`
             alert("価格を更新しました");
