@@ -9,11 +9,12 @@ const dbConf = {
 
 module.exports = {
   /**
-   * 会員管理に必要なデータ
+   * 車両一覧画面に必要なデータ
    */
-  findUserList: async function () {
+  getVehicleList: async function () {
     // sql
-    const sql = `SELECT * FROM users`;
+    const sql = "SELECT * FROM view_vehicle_list";
+
     // select実行
     const connection = await mysql.createConnection(dbConf);
     const [rows, fields] = await connection.execute(sql);
@@ -22,6 +23,7 @@ module.exports = {
     /**
      * データの加工処理&データ返す処理
      */
+    console.log(rows);
+    console.log(fields);
   }
-
 }

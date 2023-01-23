@@ -1,20 +1,20 @@
 module.exports = class Car {
   constructor() {
     // db上のid
-    this._id = null;
+    this._carId = null;
     // 車の車種名
-    this._name = null;
+    this._carName = null;
     // 車のメーカー
-    this._maker = null;
+    this._carMaker = null;
     // 車の乗車定員数
-    this._passenger = null;
+    this._carPassenger = null;
     // 車の走行年数
-    this._modelYear = null;
+    this._carModelYear = null;
     // 車の走行距離
-    this._mileage = null;
+    this._carMileage = null;
     // 車のベースカラー
-    this._baseColor = null;
+    this._carBaseColor = null;
     // 車の画像ファイルパス
-    this._imgPath = null;
+    this._carImgPath = null;
   }
 }

@@ -7,14 +7,6 @@ const dbConfig = {
   database: 'auction'
 };
 
-// ローカル
-// const dbConfig = {
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'auction'
-// };
-
 const userType = {
   student : 0,
   teacher : 1,

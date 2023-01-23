@@ -7,35 +7,42 @@
     <title>車両売上一覧</title>
 </head>
 <body>
-    <%- include("../header.ejs")%>
     <main class="w-100 my-0 mx-auto d-flex flex-column justify-content-center mt-4">
         <h2 class="mx-auto w-75">車両売上一覧</h2>
+        <article>
+            <h3 class="d-none mx-auto w-75">検索</h3>
+            <form action="" method="" class="form-inline mb-4">
+                <div class="input-group w-75 mx-auto">
+                    <input type="text" class="form-control" placeholder="キーワードを入力">
+                    <button class="btn btn-outline-primary" type="button" id="button-addon2"><i class="fas fa-search"></i> 検索</button>
+                </div>
+            </form>
+        </article>
         <article class="mx-auto w-75 mb-5">
             <h3 class="d-none">車両一覧</h3>
-            <% for(let i in salesInfos){ %>
-                <div class="card mb-2">
-                    <div class="row g-0">
-                        <div class="col-md-4 p-3">
-                            <img class="card-img-top" src="/img/car_img/<%= salesInfos[i].car_img_path %>" alt="car_icon">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">車名:<%= salesInfos[i].car_name %></h5>
-                                <p class="card-text">
-                                    終了価格: <%= salesInfos[i].end_price %> 円<br>
-                                    購入者: <%= salesInfos[i].user_name %> 様
-                                </p>
-                                <p class="card-text"><small class="text-muted">終了日時:<%= salesInfos[i].end_datetime %></small></p>
-                            </div>
+            <div class="card mb-2">
+                <div class="row g-0">
+                    <div class="col-md-4 p-3">
+                        <img class="card-img-top" src="./img/demo_img/K0000658496.jpg" alt="car_icon">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">車名:アルティミス</h5>
+                            <p class="card-text">
+                                終了価格: 5000000 円<br>
+                                購入者: <a href="">小田和正</a> 様
+                            </p>
+                            <p class="card-text"><small class="text-muted">終了日時:2022年10月11日13時40分〜</small></p>
+                            <a href="" class="btn btn-primary">詳 細</a>
                         </div>
                     </div>
                 </div>
-            <% } %>
+            </div>
             <div class="card mb-2">
                 <div class="card-body">
                     <h5 class="card-title">売上合計</h5>
                     <p class="card-text">
-                        合計金額 : <%= sum %> 円<br>
+                        合計金額 : 1230000 円<br>
                     </p>
                 </div>
             </div>
@@ -43,11 +50,13 @@
         <article class="mx-auto">
             <h4 class="d-none">ページャー</h4>
             <ul class="pagination">
-                <li class="page-item <%= currentPage == 1 ? 'disabled' : '' %>"><a href="?page=<%= currentPage - 1 %>" class="page-link">前へ</a></li>
-                <% for (let i=0; i < pageLength; i++) { %>
-                    <li class="page-item"><a href="?page=<%= i + 1 %>" class="page-link"><%= i + 1 %></a></li>
-                <% } %>
-                <li class="page-item <%= currentPage == pageLength ? 'disabled' : '' %>"><a href="?page=<%= currentPage + 1 %>" class="page-link">次へ</a></li>
+                <li class="page-item"><a href="" class="page-link">前へ</a></li>
+                <li class="page-item"><a href="" class="page-link">1</a></li>
+                <li class="page-item"><a href="" class="page-link">2</a></li>
+                <li class="page-item"><a href="" class="page-link">3</a></li>
+                <li class="page-item"><a href="" class="page-link">4</a></li>
+                <li class="page-item"><a href="" class="page-link">5</a></li>
+                <li class="page-item"><a href="" class="page-link">次へ</a></li>
             </ul>
         </article>
     </main>

@@ -11,8 +11,8 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 // チャットルームオブジェクトを外部アクセスできるようにする
-const Auction = require('./class/Auction');
-const cr = new Auction(io);
+const ChatRoom = require('./class/ChatRoom');
+const cr = new ChatRoom(io, 0001);
 
 // データベースモジュール
 const awaitMysql = require('mysql-await');
